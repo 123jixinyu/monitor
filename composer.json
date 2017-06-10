@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "aliyuncs/oss-sdk-php": "^2.0",
-        "barryvdh/laravel-ide-helper": "^2.2"
+        "barryvdh/laravel-ide-helper": "^2.2",
+        "ericmakesstuff/laravel-server-monitor": "^1.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
