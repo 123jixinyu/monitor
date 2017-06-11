@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Redis\RedisServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,5 +25,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->register(RedisServiceProvider::class);
     }
 }

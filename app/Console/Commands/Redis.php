@@ -1,16 +1,16 @@
 <?php
 namespace App\Console\Commands;
 
-use App\Classes\Connect\MysqlConnect;
+use App\Classes\Connect\RedisConnect;
 use App\Classes\Sender\Email;
 use Illuminate\Console\Command;
 use Cache;
 
-class Mysql extends Command
+class Redis extends Command
 {
-    protected $name = 'monitor:mysql';
+    protected $name = 'monitor:redis';
 
-    protected $description = '监控mysql';
+    protected $description = '监控redis';
 
     protected $cacheKey;
 
@@ -21,23 +21,23 @@ class Mysql extends Command
     public function __construct()
     {
         parent::__construct();
-        $this->cacheKey = 'monitor_mysql';
+        $this->cacheKey = 'monitor_redis';
         $this->config = config('monitor');
     }
 
-    public function handle(Email $email, MysqlConnect $mysqlConnect)
+    public function handle(Email $email, RedisConnect $redisConnect)
     {
         if (!Cache::has($this->cacheKey)) {
             Cache::put($this->cacheKey, 0, $this->cacheTime);
         }
-        $info = $mysqlConnect->tryConnect();
+        $info = $redisConnect->tryConnect();
         if ($info !== true) {
             //状态异常，缓存value+1,并判断是否满足发邮件的条件
             $cache = Cache::get($this->cacheKey);
             $new = $cache + 1;
-            $times = $this->config['mysql']['times'];
+            $times = $this->config['redis']['times'];
             if ($new % $times == 0) {
-                $email->subject = 'mysql存在异常';
+                $email->subject = 'redis存在异常';
                 $email->message = $info;
                 $email->send();
             }

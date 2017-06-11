@@ -1,13 +1,13 @@
 <?php
 return [
     //总开关，是否开启监控
-    'monitor' => true,
+    'switch' => true,
     'http' => [
         'times' => 1,//连续超过多少次开始报警
-        'code'=>400,//http返回码警戒值
+        'code' => 400,//http返回码警戒值
         'urls' => [//需要监控的url
             'http://www.123jixinyu.com',
-            'http://www.51myd.com/tet',
+            'http://www.51myd.com',
         ]
     ],
     'sphinx' => [
@@ -16,7 +16,9 @@ return [
     'mysql' => [
         'times' => 1,//连续超过多少次开始报警
     ],
-    '',
+    'redis'=>[
+        'times' => 1,//连续超过多少次开始报警
+    ],
     'from' => '848280118@qq.com',
     'to' => [
         '848280118@qq.com'

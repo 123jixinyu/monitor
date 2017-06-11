@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\Http;
 use App\Console\Commands\Mysql;
+use App\Console\Commands\Redis;
 use App\Console\Commands\Sphinx;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -19,7 +20,8 @@ class Kernel extends ConsoleKernel
         Commands\Inspire::class,
         Sphinx::class,
         Mysql::class,
-        Http::class
+        Http::class,
+        Redis::class
     ];
 
     /**
@@ -30,8 +32,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('monitor:sphinx')->everyMinute();//监控sphinx
-        $schedule->command('monitor:mysql')->everyMinute();//监控mysql
-        $schedule->command('monitor:http')->everyMinute();//监控nginx
+        if(config('monitor.switch')){
+            $schedule->command('monitor:sphinx')->everyMinute();//监控sphinx
+            $schedule->command('monitor:mysql')->everyMinute();//监控mysql
+            $schedule->command('monitor:http')->everyMinute();//监控nginx
+            $schedule->command('monitor:redis')->everyMinute();//监控redis
+        }
     }
 }

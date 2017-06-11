@@ -1,5 +1,5 @@
 <?php
-namespace App\Classes\Mysql;
+namespace App\Classes\Connect;
 
 use DB;
 
