@@ -32,11 +32,8 @@ return [
          */
         'HttpPing' => [
             [
-                'url' => 'http://www.example.com/',
-            ],
-            [
-                'url' => 'http://www.example.com/',
-                'checkPhrase' => 'Example Domain',
+                'url' => 'http://www.123jixinyu.com',
+                'checkPhrase' => 'www.123jixinyu.com',
                 'timeout' => 10,
                 'allowRedirects' => false,
             ],
@@ -47,13 +44,6 @@ return [
          * approaching expiration.
          */
         'SSLCertificate' => [
-            [
-                'url' => 'https://www.example.com/',
-            ],
-            [
-                'url' => 'https://www.example.com/',
-                'alarmDaysBeforeExpiration' => [14, 7],
-            ],
         ],
     ],
 
@@ -84,8 +74,11 @@ return [
          * Here you can specify how emails should be sent.
          */
         'mail' => [
-            'from' => 'your@email.com',
-            'to'   => 'your@email.com',
+            'from' => '848280118@qq.com',
+            'to'   => [
+                '848280118@qq.com',
+                'jxy@5ihuanniu.com'
+            ],
         ],
 
         /*
