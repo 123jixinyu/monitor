@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\Sphinx;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -14,6 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\Inspire::class,
+        Sphinx::class
     ];
 
     /**
@@ -24,7 +26,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-//        $schedule->command('monitor:run')->everyMinute();
-        $schedule->command('monitor:run HttpPing')->everyMinute();
+        $schedule->command('monitor:sphinx')->everyMinute();//监控sphinx
     }
 }
