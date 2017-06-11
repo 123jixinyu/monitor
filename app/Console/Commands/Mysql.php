@@ -1,16 +1,16 @@
 <?php
 namespace App\Console\Commands;
 
+use App\Classes\Mysql\MysqlConnect;
 use App\Classes\Sender\Email;
-use App\Classes\Sphinx\SphinxClient;
 use Illuminate\Console\Command;
 use Cache;
 
-class Sphinx extends Command
+class Mysql extends Command
 {
-    protected $name = 'monitor:sphinx';
+    protected $name = 'monitor:mysql';
 
-    protected $description = '监控搜索引擎';
+    protected $description = '监控mysql';
 
     protected $cacheKey;
 
@@ -21,7 +21,7 @@ class Sphinx extends Command
     public function __construct()
     {
         parent::__construct();
-        $this->cacheKey = 'monitor_sphinx';
+        $this->cacheKey = 'monitor_mysql';
         $this->config = config('monitor');
     }
 
@@ -30,16 +30,16 @@ class Sphinx extends Command
         if (!Cache::has($this->cacheKey)) {
             Cache::put($this->cacheKey, 0, $this->cacheTime);
         }
-        $sphinx = new SphinxClient();
-        $sphinx->SphinxClient();
-        if (!$sphinx->Status()) {
+        $mysql = new MysqlConnect();
+        $info = $mysql->tryConnect();
+        if ($info !== true) {
             //状态异常，缓存value+1,并判断是否满足发邮件的条件
             $cache = Cache::get($this->cacheKey);
             $new = $cache + 1;
-            $times = $this->config['sphinx']['times'];
+            $times = $this->config['mysql']['times'];
             if ($new % $times == 0) {
-                $email->subject = 'sphinx搜索引擎异常';
-                $email->message = '连续超过' . $times . '次无法连接';
+                $email->subject = 'mysql存在异常';
+                $email->message = $info;
                 $email->send();
             }
             Cache::put($this->cacheKey, $new, $this->cacheTime);
