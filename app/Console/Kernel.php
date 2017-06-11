@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\Http;
 use App\Console\Commands\Mysql;
 use App\Console\Commands\Sphinx;
 use Illuminate\Console\Scheduling\Schedule;
@@ -18,6 +19,7 @@ class Kernel extends ConsoleKernel
         Commands\Inspire::class,
         Sphinx::class,
         Mysql::class,
+        Http::class
     ];
 
     /**
@@ -30,5 +32,6 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('monitor:sphinx')->everyMinute();//监控sphinx
         $schedule->command('monitor:mysql')->everyMinute();//监控mysql
+        $schedule->command('monitor:http')->everyMinute();//监控nginx
     }
 }
