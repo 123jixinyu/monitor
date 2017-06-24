@@ -8,11 +8,11 @@ if (!function_exists('ping_get_response_code')) {
      * @param bool $allowRedirects
      * @return int|mixed
      */
-    function ping_get_response_code($url,$timeout=0,$allowRedirects=true)
+    function ping_get_response_code($url, $timeout = 0, $allowRedirects = true)
     {
-        $ping=new \App\Classes\Tools\Ping();
-        if($timeout)$ping->setTimeout($timeout);
-        if(!$allowRedirects)$ping->setTimeout($allowRedirects);
+        $ping = new \App\Classes\Tools\Ping();
+        if ($timeout) $ping->setTimeout($timeout);
+        if (!$allowRedirects) $ping->setTimeout($allowRedirects);
         return $ping->check($url);
     }
 }
@@ -40,17 +40,37 @@ if (!function_exists('try_connect_sphinx')) {
      * @param string $port
      * @return bool
      */
-    function try_connect_sphinx($host='127.0.0.1',$port='9312')
+    function try_connect_sphinx($host = '127.0.0.1', $port = '9312')
     {
         $sphinx = new \App\Classes\Tools\SphinxClient();
         $sphinx->SphinxClient();
-        $sphinx->SetServer($host,$port);
-        $status=$sphinx->Status();
+        $sphinx->SetServer($host, $port);
+        $status = $sphinx->Status();
         if (!$status) {
             return false;
         }
         return true;
     }
 }
+
+if (!function_exists('check_port')) {
+    /**
+     * 检测端口是否正常
+     * @param $host
+     * @param string $port
+     * @param int $timeout
+     * @return bool
+     */
+    function check_port($host, $port='80', $timeout = 2)
+    {
+        $connection = @fsockopen($host, $port, $errno, $errstr, $timeout);
+        if (is_resource($connection)) {
+            fclose($connection);
+            return true;
+        }
+        return false;
+    }
+}
+
 
 
