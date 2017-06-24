@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "08e509536e3b941c4670e0feca12dccd",
+    "content-hash": "c0f8466a1c3720ce5b64ee1d673d3b59",
     "packages": [
         {
             "name": "aliyuncs/oss-sdk-php",
@@ -694,6 +694,45 @@
                 "tokenizer"
             ],
             "time": "2015-12-05T17:17:57+00:00"
+        },
+        {
+            "name": "karlmonson/laravel-ping",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/karlmonson/laravel-ping.git",
+                "reference": "f884bf2c66a2800939813fc8fa26a9613a5423c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/karlmonson/laravel-ping/f884bf2c66a2800939813fc8fa26a9613a5423c6.zip",
+                "reference": "f884bf2c66a2800939813fc8fa26a9613a5423c6",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~6.0",
+                "illuminate/support": "^5.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Karlmonson\\Ping\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Karl Monson",
+                    "email": "karl@karlmonson.com",
+                    "homepage": "https://github.com/karlmonson",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple Ping For Laravel Applications",
+            "time": "2017-05-09T16:34:03+00:00"
         },
         {
             "name": "laravel/framework",

@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.1.40 (LTS) on 2017-06-11.
+ * Generated for Laravel 5.1.40 (LTS) on 2017-06-24.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -11524,6 +11524,47 @@ namespace {
          */
         public static function getNames(){
             return \Illuminate\View\Factory::getNames();
+        }
+        
+    }
+
+
+    class Ping extends \Karlmonson\Ping\Facades\Ping{
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function check($url){
+            return \Karlmonson\Ping\Ping::check($url);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function checkA($host, $val){
+            return \Karlmonson\Ping\Ping::checkA($host, $val);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function checkCname($host, $val){
+            return \Karlmonson\Ping\Ping::checkCname($host, $val);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function checkNameserver($host, $val){
+            return \Karlmonson\Ping\Ping::checkNameserver($host, $val);
         }
         
     }

@@ -1,5 +1,5 @@
 <?php
-namespace App\Classes\Sphinx;
+namespace App\Classes\Tools;
 //
 // $Id$
 //

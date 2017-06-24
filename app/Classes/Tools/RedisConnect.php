@@ -1,9 +1,9 @@
 <?php
-namespace App\Classes\Connect;
+namespace App\Classes\Tools;
 
-use DB;
+use Redis;
 
-class MysqlConnect
+class RedisConnect
 {
     /**
      * 尝试连接mysql
@@ -12,7 +12,7 @@ class MysqlConnect
     public function tryConnect()
     {
         try {
-            DB::connection();
+            $redis = Redis::set('redis_connect_try', 'try');
             return true;
         } catch (\Exception $ex) {
             return $ex->getMessage();
