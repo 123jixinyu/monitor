@@ -17,6 +17,7 @@ class UserMonitors extends Migration
             $table->increments('id');
             $table->integer('user_id')->index();
             $table->integer('monitor_id')->index();
+            $table->integer('group_id')->index();
             $table->string('host')->index();
             $table->integer('port')->index();
             $table->integer('timeout')->index();

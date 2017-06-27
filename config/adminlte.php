@@ -58,7 +58,7 @@ return [
     |
     */
 
-    'layout' => null,
+    'layout' =>'top-nav',
 
     /*
     |--------------------------------------------------------------------------
@@ -85,15 +85,16 @@ return [
     |
     */
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => '/',
 
-    'logout_url' => '/logout',
+    'logout_url' => 'auth/logout',
 
-    'logout_method' => 'get',
+    'logout_method' => 'GET',
 
-    'login_url' => 'login',
+    'login_url' => 'auth/login',
 
-    'register_url' => 'register',
+    'register_url' => 'auth/register',
+
 
     /*
     |--------------------------------------------------------------------------
@@ -109,12 +110,6 @@ return [
 
     'menu' => [
         '左侧菜单',
-        [
-            'text' => 'Blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
-        ],
-//        'MAIN SI',
         [
             'text' => '控制台管理',
             'url' => '',
@@ -135,21 +130,6 @@ return [
             'url' => 'admin/settings',
             'icon' => 'user',
         ],
-
-
-//        'LABELS',
-//        [
-//            'text'       => 'Important',
-//            'icon_color' => 'red',
-//        ],
-//        [
-//            'text'       => 'Warning',
-//            'icon_color' => 'yellow',
-//        ],
-//        [
-//            'text'       => 'Information',
-//            'icon_color' => 'aqua',
-//        ],
     ],
 
     /*
