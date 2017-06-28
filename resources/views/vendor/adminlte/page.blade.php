@@ -132,6 +132,8 @@
 
 @section('adminlte_js')
     <script src="{{ asset('vendor/adminlte/dist/js/app.min.js') }}"></script>
+    <script src="{{asset('assets/js/vue/vue.js')}}"></script>
+    <script src="{{asset('assets/js/vue/vue-resource.min.js')}}"></script>
     @stack('js')
     @yield('js')
 @stop

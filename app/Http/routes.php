@@ -12,6 +12,8 @@
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'IndexController@index')->name('index');
+    
+    Route::get('get_monitor_types','MonitorTypeController@getMonitorTypes')->name('get_monitor_types');
 });
 
 // 认证路由...

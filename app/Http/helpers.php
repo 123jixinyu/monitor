@@ -61,7 +61,7 @@ if (!function_exists('check_port')) {
      * @param int $timeout
      * @return bool
      */
-    function check_port($host, $port='80', $timeout = 2)
+    function check_port($host, $port = '80', $timeout = 2)
     {
         $connection = @fsockopen($host, $port, $errno, $errstr, $timeout);
         if (is_resource($connection)) {
@@ -72,5 +72,23 @@ if (!function_exists('check_port')) {
     }
 }
 
+if (!function_exists('api_response')) {
+    /**
+     * api统一返回
+     * @param $code
+     * @param string $msg
+     * @param array $data
+     * @return string
+     */
+    function api_response($code, $msg = '', $data = [])
+    {
+        $data = [
+            'code' => $code,
+            'msg' => $msg,
+            'data' => $data
+        ];
+        return json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+}
 
 

@@ -19,6 +19,7 @@ class MonitorTypes extends Migration
             $table->string('default_host')->default('127.0.0.1');
             $table->integer('default_port')->default(80);
             $table->integer('default_timeout')->default(2);
+            $table->integer('default_times')->default(3);
             $table->timestamps();
         });
     }
