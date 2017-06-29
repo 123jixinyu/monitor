@@ -125,59 +125,43 @@
                                 <div class="form-group">
                                     <label class="required">选择监控对象</label>
                                     <select multiple class="form-control">
-                                        <option>option 1</option>
-                                        <option>option 2</option>
-                                        <option>option 3</option>
-                                        <option>option 4</option>
-                                        <option>option 5</option>
+                                        <option v-for="(item,key,index) in items" v-bind:value="item.id" v-on:click="onChange(key)" v-bind:selected="default_type==key?'selected':''">
+                                            @{{item.name}}
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="required">地址</label>
-                                    <input type="email" class="form-control" placeholder="">
+                                    <input type="text" class="form-control" placeholder="" v-model="selected.default_host">
                                 </div>
                                 <div class="form-group">
                                     <label class="required">端口</label>
-                                    <input type="email" class="form-control" placeholder="">
+                                    <input type="text" class="form-control" placeholder="" v-model="selected.default_port">
                                 </div>
                                 <div class="form-group">
-                                    <label class="required">请求超时设置</label>
-                                    <select class="form-control">
-                                        <option>1秒</option>
-                                        <option>2秒</option>
-                                        <option>3秒</option>
-                                        <option>4秒</option>
-                                        <option>5秒</option>
-                                    </select>
+                                    <label class="required">请求超时设置（单位秒）</label>
+                                    <input type="text" class="form-control" placeholder="" v-model="selected.default_timeout">
                                 </div>
                                 <div class="form-group">
-                                    <label class="required">触发事件</label>
-                                    <select class="form-control">
-                                        <option>1次</option>
-                                        <option>2次</option>
-                                        <option>3次</option>
-                                        <option>4次</option>
-                                        <option>5次</option>
-                                    </select>
+                                    <label class="required">触发事件（触发报警的次数）</label>
+                                    <input type="text" class="form-control" placeholder="" v-model="selected.default_times">
                                 </div>
                                 <div class="form-group">
                                     <label class="required">通知组</label><span class="pull-right">没有通知组？<a
                                                 href="#">去创建</a></span>
                                     <select class="form-control">
-                                        <option>通知组1</option>
-                                        <option>通知组2</option>
-                                        <option>通知组3</option>
-                                        <option>通知组4</option>
-                                        <option>通知组5</option>
+                                        <option v-for="(group,key) in groups" v-bind:value="group.id">
+                                            @{{group.name}}
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>备注</label>
-                                    <input type="text" class="form-control" placeholder="请输入备注">
+                                    <input type="text" class="form-control" placeholder="请输入备注" v-model="remark">
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox"> 是否立即开启
+                                        <input type="checkbox" v-model="is_checked"> 是否立即开启
                                     </label>
                                 </div>
                             </div>
@@ -198,15 +182,40 @@
         var app = new Vue({
             el: '#monitor-edit',
             data: {
-                monitor_types:''
+                items: [],
+                selected:{},
+                groups:[],
+                remark:'',
+                is_checked:0,
+                default_type:0
             },
-            mounted:function(){
+            mounted: function () {
                 _this=this;
-                _this.monitor_types=_this.$http.get('get_monitor_types').then(function(response){
-                    _this.monitor_types=response.data.data;
+                _this.$http.get('get_monitor_types').then(function (res) {
+                    var data = res.data.data;
+                    if (res.data.code=='200'&&data) {
+                        data.forEach(function(value){
+                            _this.items.push(value);
+                        });
+                        _this.selected=_this.items[_this.default_type];
+                    }
                 });
+                _this.$http.get('get_groups').then(function(res){
+                    var data = res.data.data;
+                    if(res.data.code=='200'&&data){
+                        data.forEach(function(value){
+                            _this.groups.push(value);
+                        });
+                    }
+                });
+            },
+            methods:{
+                onChange:function(key){
+                    _this=this;
+                    _this.default_type=key;
+                    _this.selected=_this.items[key];
+                }
             }
-
-        })
+        });
     </script>
 @endsection

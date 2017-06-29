@@ -15,8 +15,8 @@ class SenderGroups extends Migration
         //通知组表
         Schema::create('sender_groups',function(Blueprint $table){
             $table->increments('id');
+            $table->integer('user_id');
             $table->string('name');
-            $table->string('remark')->nullable();
             $table->timestamps();
         });
     }
