@@ -22,7 +22,9 @@ class UserMonitors extends Migration
             $table->integer('port')->index();
             $table->integer('timeout')->index();
             $table->integer('times')->index();
+            $table->tinyInteger('status')->index()->default(0)->comment('0:正常 1:异常');
             $table->string('remark')->nullable();
+            $table->tinyInteger('is_open')->default(0)->index();
             $table->timestamps();
         });
     }

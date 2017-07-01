@@ -12,7 +12,8 @@
         "guzzlehttp/guzzle": "^6.2",
         "predis/predis": "^1.1",
         "karlmonson/laravel-ping": "^1.0",
-        "jeroennoten/laravel-adminlte": "^1.19"
+        "jeroennoten/laravel-adminlte": "^1.19",
+        "barryvdh/laravel-debugbar": "^2.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

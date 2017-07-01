@@ -125,7 +125,22 @@
             @endif
         </div>
         <!-- /.content-wrapper -->
-
+        <div id="dialog"  v-bind:class="['modal',is_show ? 'show':'fade']" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" v-text="dialog_title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p v-text="dialog_message"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="onClick($event)">关闭</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </div>
     <!-- ./wrapper -->
 @stop
@@ -135,5 +150,26 @@
     <script src="{{asset('assets/js/vue/vue.js')}}"></script>
     <script src="{{asset('assets/js/vue/vue-resource.min.js')}}"></script>
     {{--@stack('js')--}}
+    <script>
+        var dialog=new Vue({
+            el:'#dialog',
+            data:{
+                is_show:false,
+                dialog_title:'',
+                dialog_message:''
+            },
+            methods:{
+                onClick:function($event){
+                    this.is_show=this.is_show?false:true;
+                },
+                show:function(message){
+                    _this=this;
+                    _this.dialog_title='提示';
+                    _this.dialog_message=message;
+                    _this.is_show=true;
+                }
+            }
+        });
+    </script>
     @yield('js')
 @stop

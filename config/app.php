@@ -146,7 +146,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Karlmonson\Ping\PingServiceProvider::class,
-        JeroenNoten\LaravelAdminLte\ServiceProvider::class
+        JeroenNoten\LaravelAdminLte\ServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
@@ -195,6 +196,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'Ping' => Karlmonson\Ping\Facades\Ping::class,
+        'DebugBar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
