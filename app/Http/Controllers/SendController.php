@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Entities\SenderGroups;
 use App\Entities\SenderPeople;
+use App\Entities\UserMonitor;
 use Illuminate\Http\Request;
 use Auth;
 use Validator;
@@ -91,6 +92,11 @@ class SendController extends Controller
         }
         $user_id = Auth::user()->id;
         $id = array_get($params, 'id');
+        //如果有分组在使用则禁止删除
+        $userMonitors=UserMonitor::where('user_id',$user_id)->where('group_id',$id)->get();
+        if(count($userMonitors)>0){
+            return api_response('500', '该分组正在被使用中，无法删除');
+        }
         //删除分组
         $delGroup = SenderGroups::where('user_id', $user_id)->where('id', $id)->delete();
         if ($delGroup) {

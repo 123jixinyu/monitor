@@ -161,14 +161,16 @@
                     });
                 },
                 del_group:function(id){
-                    _this=this;
-                    _this.$http.post('del_group',{id:id,_token:_this.token}).then(function(res){
-                        if(res.data.code=='200'){
-                            window.location.reload();
-                        }else{
-                            dialog.show(res.data.msg);
-                        }
-                    });
+                    if(confirm('确定删除？删除后将无法还原。')){
+                        _this=this;
+                        _this.$http.post('del_group',{id:id,_token:_this.token}).then(function(res){
+                            if(res.data.code=='200'){
+                                window.location.reload();
+                            }else{
+                                dialog.show(res.data.msg);
+                            }
+                        });
+                    }
                 }
             }
         });
