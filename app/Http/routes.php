@@ -13,14 +13,21 @@
 Route::group(['middleware' => ['auth']], function () {
     App::setLocale('zh');
     Route::get('/', 'MonitorController@index')->name('monitor_index');
-    
-    Route::get('get_monitor_types','MonitorTypeController@getMonitorTypes')->name('get_monitor_types');
-    Route::get('get_groups','SendController@getGroup')->name('get_groups');
+    Route::get('group_index', 'SendController@index')->name('monitor_index');
 
+    //用户监控相关路由
+    Route::get('get_monitor_types','MonitorTypeController@getMonitorTypes')->name('get_monitor_types');
     Route::post('save_user_monitor','MonitorController@save')->name('save_user_monitor');
     Route::get('get_user_monitor_detail','MonitorController@detail')->name('get_user_monitor_detail');
     Route::post('del_user_monitor','MonitorController@delete')->name('del_user_monitor');
     Route::post('open_handle','MonitorController@openHandle')->name('open_handle');
+
+    //通知组相关路由
+    Route::get('get_groups','SendController@getGroup')->name('get_groups');
+    Route::get('get_group_detail','SendController@getGroupDetail')->name('get_group_detail');
+    Route::post('save_group','SendController@saveGroup')->name('save_group');
+    Route::post('del_group','SendController@delGroup')->name('del_group');
+
 });
 
 // 认证路由...

@@ -64,7 +64,7 @@
                                             <td>{{$monitor->getStatus()}}</td>
                                             <td>{{$monitor->getOpen()}}</td>
                                             <td>
-                                                <a href='javascript:void(0);' v-on:click="edit({{$monitor->id}})"><span>编辑</span></a>
+                                                <a href='javascript:void(0);' v-on:click="edit({{$monitor->id}})"><span>修改</span></a>
                                                 <a href='javascript:void(0);' v-on:click="open({{$monitor->id}})">{{$monitor->getSwitch()}}</a>
                                                 <a href='javascript:void(0);' v-on:click.prevent="del({{$monitor->id}})">删除</a>
                                             </td>

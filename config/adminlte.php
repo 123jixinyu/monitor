@@ -112,12 +112,12 @@ return [
         '左侧菜单',
         [
             'text' => '控制台管理',
-            'url' => '',
+            'url' => '/',
             'icon' => 'desktop',
         ],
         [
             'text' => '通知组管理',
-            'url' => '',
+            'url' => 'group_index',
             'icon' => 'group',
         ],
         [

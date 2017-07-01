@@ -105,5 +105,6 @@ return [
         'remark'=>'备注',
         'status'=>'状态',
         'is_open'=>'是否立即开启',
+        'group'=>'通知组名称',
     ],
 ];
