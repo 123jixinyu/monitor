@@ -67,8 +67,10 @@
                                                     <td>{{$people->remark}}</td>
                                                     <td>{{$people->created_at}}</td>
                                                     <td>
-                                                        <a href="javascript:void(0)" data-toggle="modal" data-target="#monitor-user-edit" v-on:click="add_mem({{$group->id}})">修改</a>
-                                                        <a href="javascript:void(0)">删除</a>
+                                                        <a href="javascript:void(0)"
+                                                           v-on:click="update_mem({{$group->id}},{{$people->id}})">修改</a>
+                                                        <a href="javascript:void(0)"
+                                                           v-on:click="del_mem({{$group->id}},{{$people->id}})">删除</a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -239,10 +241,10 @@
                         });
                     }
                 },
-                add_mem: function ($g_id) {
+                add_mem: function (g_id) {
                     _this = this;
-                    if ($g_id) {
-                        _this.group_id = $g_id;
+                    if (g_id) {
+                        _this.group_id = g_id;
                     }
                 },
                 save_mem: function () {
@@ -266,6 +268,42 @@
                             dialog.show(res.data.msg);
                         }
                     });
+                },
+                update_mem: function (g_id, p_id) {
+                    _this = this;
+                    _this.group_id = g_id;
+                    _this.member_id = p_id;
+                    _this.$http.get('get_member_detail', {params: {id: _this.member_id}}).then(function (res) {
+                        if (res.data.code == '200') {
+                            obj = res.data.data;
+                            _this.member_name = obj.name;
+                            _this.member_type = obj.type;
+                            _this.member_phone = obj.phone;
+                            _this.member_email = obj.email;
+                            _this.member_remark = obj.remark;
+                            $('#monitor-user-edit').modal();
+                        } else {
+                            dialog.show(res.data.msg);
+                        }
+                    });
+                },
+                del_mem: function (g_id, p_id) {
+                    if (confirm('确定删除？删除后将无法还原。')) {
+                        _this = this;
+                        _this.group_id = g_id;
+                        _this.member_id = p_id;
+                        _this.$http.post('del_member', {
+                            id: _this.member_id,
+                            _token: _this.token
+
+                        }).then(function (res) {
+                            if (res.data.code == '200') {
+                                window.location.reload();
+                            } else {
+                                dialog.show(res.data.msg);
+                            }
+                        });
+                    }
                 }
             }
         });

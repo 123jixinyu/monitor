@@ -149,4 +149,44 @@ class SendController extends Controller
         $senderPeople->save();
         return api_response('200', 'success');
     }
+
+    /**
+     * 获取会员详情
+     * @param Request $request
+     * @return string
+     */
+    public function getMemberDetail(Request $request)
+    {
+        $params = $request->all();
+        $validator = Validator::make($params, [
+            'id' => 'required|exists:sender_peoples,id',
+        ]);
+        if ($validator->fails()) {
+            return api_response('400', $validator->errors()->first());
+        }
+        //验证id是否非法
+        $senderPeople = SenderPeople::find(array_get($params, 'id'));
+        if (!SenderGroups::where('user_id', Auth::user()->id)->where('id', $senderPeople->group_id)->first()) {
+            return api_response('500', '非法请求');
+        }
+        return api_response('200', 'success', $senderPeople);
+    }
+
+    /**
+     * 删除分组中的会员
+     * @param Request $request
+     * @return string
+     */
+    public function delMember(Request $request)
+    {
+        $params = $request->all();
+        $validator = Validator::make($params, [
+            'id' => 'required|exists:sender_peoples,id'
+        ]);
+        if ($validator->fails()) {
+            return api_response('400', '非法请求');
+        }
+        SenderPeople::find(array_get($params, 'id'))->delete();
+        return api_response('200', 'success');
+    }
 }

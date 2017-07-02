@@ -29,6 +29,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('del_group','SendController@delGroup')->name('del_group');
 
     Route::post('save_member','SendController@saveMember')->name('save_member');
+    Route::get('get_member_detail','SendController@getMemberDetail')->name('get_member_detail');
+    Route::post('del_member','SendController@delMember')->name('del_member');
 
 });
 
