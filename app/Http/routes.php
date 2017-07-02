@@ -28,6 +28,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('save_group','SendController@saveGroup')->name('save_group');
     Route::post('del_group','SendController@delGroup')->name('del_group');
 
+    Route::post('save_member','SendController@saveMember')->name('save_member');
+
 });
 
 // 认证路由...

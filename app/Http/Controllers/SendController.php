@@ -93,8 +93,8 @@ class SendController extends Controller
         $user_id = Auth::user()->id;
         $id = array_get($params, 'id');
         //如果有分组在使用则禁止删除
-        $userMonitors=UserMonitor::where('user_id',$user_id)->where('group_id',$id)->get();
-        if(count($userMonitors)>0){
+        $userMonitors = UserMonitor::where('user_id', $user_id)->where('group_id', $id)->get();
+        if (count($userMonitors) > 0) {
             return api_response('500', '该分组正在被使用中，无法删除');
         }
         //删除分组
@@ -106,6 +106,47 @@ class SendController extends Controller
         } else {
             return api_response('500', '删除失败');
         }
+    }
 
+    /**
+     * 保存通知组成员信息
+     * @param Request $request
+     * @param SenderPeople $senderPeople
+     * @return string
+     */
+    public function saveMember(Request $request, SenderPeople $senderPeople)
+    {
+        $params = $request->all();
+        $validator = Validator::make($params, [
+            'group_id' => 'required|exists:sender_groups,id',
+            'id' => 'exists:sender_peoples,id',
+            'name' => 'required|between:1,5',
+            'type' => 'required|in:1,2,3',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'remark' => 'between:1,50',
+        ]);
+        if ($validator->fails()) {
+            return api_response('400', $validator->errors()->first());
+        }
+        //TODO 验证手机号
+
+        //检查是否是该用户的请求
+        $senderGroups = SenderGroups::where('user_id', Auth::user()->id)->where('id', array_get($params, 'group_id'))->first();
+        if (!$senderGroups) {
+            return api_response('400', '非法请求');
+        }
+        $id = array_get($params, 'id');
+        if ($id) {
+            $senderPeople = SenderPeople::find($id);
+        }
+        $senderPeople->group_id = array_get($params, 'group_id');
+        $senderPeople->name = array_get($params, 'name');
+        $senderPeople->type = array_get($params, 'type');
+        $senderPeople->phone = array_get($params, 'phone');
+        $senderPeople->email = array_get($params, 'email');
+        $senderPeople->remark = array_get($params, 'remark');
+        $senderPeople->save();
+        return api_response('200', 'success');
     }
 }

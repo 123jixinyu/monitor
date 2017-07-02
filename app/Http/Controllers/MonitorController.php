@@ -42,7 +42,8 @@ class MonitorController extends Controller
             'port' => 'required|integer|between:1,65535',
             'timeout' => 'required|integer|between:1,5',
             'times' => 'required|integer|between:1,5',
-            'is_open' => 'required|in:0,1'
+            'is_open' => 'required|in:0,1',
+            'remark'=>'between:0,50'
         ]);
         if ($validator->fails()) {
             return api_response('400', $validator->errors()->first());
