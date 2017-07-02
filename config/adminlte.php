@@ -112,7 +112,7 @@ return [
         '左侧菜单',
         [
             'text' => '控制台管理',
-            'url' => '/',
+            'url' => 'monitor_index',
             'icon' => 'desktop',
         ],
         [
@@ -127,7 +127,7 @@ return [
         ],
         [
             'text' => '个人设置',
-            'url' => 'admin/settings',
+            'url' => '',
             'icon' => 'user',
         ],
     ],

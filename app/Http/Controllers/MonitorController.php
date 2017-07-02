@@ -21,7 +21,7 @@ class MonitorController extends Controller
      */
     public function index(Request $request, UserMonitor $userMonitor)
     {
-        return view('index')->with([
+        return view('monitor.index')->with([
             'monitors' => $userMonitor->where('user_id',Auth::user()->id)->paginate()
         ]);
     }
