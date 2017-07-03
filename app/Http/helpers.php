@@ -91,4 +91,35 @@ if (!function_exists('api_response')) {
     }
 }
 
+if (!function_exists('user_avatar')) {
+    /**
+     * 获取头像
+     * @return mixed|string
+     */
+    function user_avatar()
+    {
+        $avatar=Auth::user()->avatar;
+        if(!$avatar){
+            $avatar=asset('assets/images/user2-160x160.jpg');
+        }
+        return $avatar;
+    }
+}
+if (!function_exists('user_name')) {
+    /**
+     * 获取用户名
+     * @return mixed|string
+     */
+    function user_name()
+    {
+        $user=Auth::user();
+        $name=$user->name;
+        if(!$name){
+            $name=$user->email;
+        }
+        return $name;
+    }
+}
+
+
 

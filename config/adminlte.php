@@ -127,7 +127,7 @@ return [
         ],
         [
             'text' => '个人设置',
-            'url' => '',
+            'url' => 'user_setting',
             'icon' => 'user',
         ],
     ],

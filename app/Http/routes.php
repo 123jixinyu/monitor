@@ -29,10 +29,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('get_group_detail', 'SendController@getGroupDetail')->name('get_group_detail');
     Route::post('save_group', 'SendController@saveGroup')->name('save_group');
     Route::post('del_group', 'SendController@delGroup')->name('del_group');
-
+    
     Route::post('save_member', 'SendController@saveMember')->name('save_member');
     Route::get('get_member_detail', 'SendController@getMemberDetail')->name('get_member_detail');
     Route::post('del_member', 'SendController@delMember')->name('del_member');
+    
+    //会员相关路由
+    Route::get('user_setting','UserController@index')->name('user_setting');
+    Route::post('upload_avatar','UserController@uploadAvatar')->name('upload_avatar');
+    Route::post('save_user','UserController@save_user')->name('save_user');
+
 
 });
 
