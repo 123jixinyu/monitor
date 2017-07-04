@@ -7,7 +7,7 @@
     <section id="introduction">
         <h2 class="page-header"><a href="#introduction">FullMonitor简介</a></h2>
         <p class="lead">
-            <b>FullMonitor</b> 致力于监控服务器运行状态,作为一个开发人员，你是否会有这样的担心:
+            <b>FullMonitor</b> 系统致力于监控服务器运行状态,作为一个开发人员，你是否会有这样的担心:我上线后的项目如果服务器挂了怎么办？如果mysql崩了怎么办？如果。。。。，这个时候你会想到如何监控服务器的运行状态，FullMonitor就是为你量身打造的服务器监控系统。
         </p>
     </section><!-- /#introduction -->
 
@@ -15,90 +15,72 @@
     <!-- ============================================================= -->
 
     <section id="download">
-        <h2 class="page-header"><a href="#download">Download</a></h2>
+        <h2 class="page-header"><a href="#download">下载</a></h2>
         <p class="lead">
-            AdminLTE can be downloaded in two different versions, each appealing to different skill levels and use case.
+            FullMonitor现在提供两种下载方式，压缩包下载以及源码安装,其中压缩包为已经压缩好的项目，无需安装，但是建议使用源码安装。
         </p>
         <div class="row">
             <div class="col-sm-6">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Ready</h3>
+                        <h3 class="box-title">压缩包</h3>
                         <span class="label label-primary pull-right"><i class="fa fa-html5"></i></span>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        <p>Compiled and ready to use in production. Download this version if you don't want to customize AdminLTE's LESS files.</p>
-                        <a href="http://almsaeedstudio.com/download/AdminLTE-dist" class="btn btn-primary"><i class="fa fa-download"></i> Download</a>
+                        <p>所有的文件已经打包好，只需要简单配置即可运行</p>
+                        <a href="#" class="btn btn-primary"><i class="fa fa-download"></i> Download</a>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <div class="box box-danger">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Source Code</h3>
+                        <h3 class="box-title">源码</h3>
                         <span class="label label-danger pull-right"><i class="fa fa-database"></i></span>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        <p>All files including the compiled CSS. Download this version if you plan on customizing the template. <b>Requires a LESS compiler.</b></p>
-                        <a href="http://almsaeedstudio.com/download/AdminLTE" class="btn btn-danger"><i class="fa fa-download"></i> Download</a>
+                        <p>需要git克隆后，然后安装所需依赖。（建议）</p>
+                        <a href="#" class="btn btn-danger"><i class="fa fa-download"></i> Download</a>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
             </div><!-- /.col -->
         </div><!-- /.row -->
-  <pre class="hierarchy bring-up"><code class="language-bash" data-lang="bash">File Hierarchy of the Source Code Package
+  <pre class="hierarchy bring-up"><code class="language-bash" data-lang="bash">代码目录结构
 
-AdminLTE/
-├── dist/
-│   ├── CSS/
-│   ├── JS
-│   ├── img
-├── build/
-│   ├── less/
-│   │   ├── AdminLTE's Less files
-│   └── Bootstrap-less/ (Only for reference. No modifications have been made)
-│       ├── mixins/
-│       ├── variables.less
-│       ├── mixins.less
-└── plugins/
-    ├── All the customized plugins CSS and JS files</code></pre>
+app目录包含了应用的核心代码；
+
+bootstrap目录包含了少许文件用于框架的启动和自动载入配置，还有一个cache文件夹用于包含框架生成的启动文件以提高性能；
+
+config目录包含了应用所有的配置文件；
+
+database目录包含了数据迁移及填充文件，如果你喜欢的话还可以将其作为SQLite数据库存放目录；
+
+public目录包含了前端控制器和资源文件（图片、js、css等）；
+
+resources目录包含了视图文件及原生资源文件（LESS、SASS、CoffeeScript），以及本地化文件；
+
+storage目录包含了编译过的Blade模板、基于文件的session、文件缓存，以及其它由框架生成的文件，该文件夹被隔离成app、framework和logs目录，app目录用于存放应用要使用的文件，framework目录用于存放框架生成的文件和缓存，最后，logs目录包含应用的日志文件；
+
+tests目录包含自动化测试，其中已经提供了一个开箱即用的PHPUnit示例；
+
+vendor目录包含Composer依赖；</code></pre>
     </section>
 
 
     <!-- ============================================================= -->
 
     <section id="dependencies">
-        <h2 class="page-header"><a href="#dependencies">Dependencies</a></h2>
-        <p class="lead">AdminLTE depends on two main frameworks.
-            The downloadable package contains both of these libraries, so you don't have to manually download them.</p>
+        <h2 class="page-header"><a href="#dependencies">依赖</a></h2>
+        <p class="lead">FullMonitor主要依赖四个主要的框架，这些框架代码会在解压或者composer的时候一同下载，不需要独立安装。</p>
         <ul class="bring-up">
+            <li><a href="https://laravel.com/">Laravel 5.1</a></li>
+            <li><a href="https://adminlte.io/" target="_blank">Adminlte</a></li>
             <li><a href="http://getbootstrap.com" target="_blank">Bootstrap 3</a></li>
+            <li><a href="https://cn.vuejs.org/" target="_blank">Vue 2</a></li>
             <li><a href="http://jquery.com/" target="_blank">jQuery 1.11+</a></li>
-            <li><a href="#plugins">All other plugins are listed below</a></li>
         </ul>
     </section>
-
-
     <!-- ============================================================= -->
-
-    <section id="advice">
-        <h2 class="page-header"><a href="#advice">A Word of Advice</a></h2>
-        <p class="lead">
-            Before you go to see your new awesome theme, here are few tips on how to familiarize yourself with it:
-        </p>
-
-        <ul>
-            <li><b>AdminLTE is based on <a href="http://getbootstrap.com/" target="_blank">Bootstrap 3</a>.</b> If you are unfamiliar with Bootstrap, visit their website and read through the documentation. All of Bootstrap components have been modified to fit the style of AdminLTE and provide a consistent look throughout the template. This way, we guarantee you will get the best of AdminLTE.</li>
-            <li><b>Go through the pages that are bundled with the theme.</b> Most of the template example pages contain quick tips on how to create or use a component which can be really helpful when you need to create something on the fly.</li>
-            <li><b>Documentation.</b> We are trying our best to make your experience with AdminLTE be smooth. One way to achieve that is to provide documentation and support. If you think that something is missing from the documentation, please do not hesitate to create an issue to tell us about it.</li>
-            <li><b>Built with <a href="http://lesscss.org/" target="_blank">LESS</a>.</b> This theme uses the LESS compiler to make it easier to customize and use. LESS is easy to learn if you know CSS or SASS. It is not necessary to learn LESS but it will benefit you a lot in the future.</li>
-            <li><b>Hosted on <a href="https://github.com/almasaeed2010/AdminLTE/" target="_blank">GitHub</a>.</b> Visit our GitHub repository to view issues, make requests, or contribute to the project.</li>
-        </ul>
-        <p>
-            <b>Note:</b> LESS files are better commented than the compiled CSS file.
-        </p>
-    </section>
-
-
 @endsection
 @section('js')
 @endsection

@@ -7,12 +7,12 @@
         <!-- Profile Image -->
             <div class="box-body box-profile">
                 <form action="{{route('upload_avatar')}}" enctype="multipart/form-data" method="post" id="form-avatar">
-                    <input id="avatar" type="file" style="display: none" name="avatar"/>
-                    {!! csrf_field() !!}}
+                    <input id="avatar" type="file" style="display: none" name="avatar" v-on:change="avatar_change"/>
+                    {!! csrf_field() !!}
                 </form>
                 <div class="user-image">
-                    <img class="profile-user-img img-responsive img-circle" src="{{user_avatar()}}" alt="User profile picture">
-                    <h5 class="text-center click-user-img"><a href="javascript:void(0);">点击头像修改</a></h5>
+                    <img class="profile-user-img img-responsive img-circle" src="{{user_avatar()}}" alt="User profile picture" v-on:click="click_upload">
+                    <h5 class="text-center click-user-img"><a href="javascript:void(0);" v-on:click="click_upload">点击头像修改</a></h5>
                 </div>
                 <p class="text-muted text-center">{{user_name()}}</p>
                 <p class="text-muted text-center">{{Auth::user()->email}}</p>
@@ -42,15 +42,8 @@
 @endsection
 @section('js')
     <script>
-        $(".profile-user-img,.click-user-img").click(function(){
-            $("#avatar").click();
-        });
-        $("#avatar").change(function(){
-           $('#form-avatar').submit();
-        });
-
         var profile=new Vue({
-            el:'#setting-profile',
+            el:"#setting-profile",
             data:{
                 experience:'{{Auth::user()->experience}}',
                 skills:'{{Auth::user()->skills}}',
@@ -66,6 +59,12 @@
                             dialog.show(res.data.msg);
                         }
                     });
+                },
+                click_upload:function(){
+                    $("#avatar").click();
+                },
+                avatar_change:function(){
+                    $('#form-avatar').submit();
                 }
             }
         });

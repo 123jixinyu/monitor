@@ -149,7 +149,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="required">通知组</label><span class="pull-right">没有通知组？<a
-                                                    href="#">去创建</a></span>
+                                                    href="{{route('monitor_index')}}">去创建</a></span>
                                         <select class="form-control" v-model="selected_group">
                                             <option v-for="(group,key) in groups" v-bind:value="group.id">
                                                 @{{group.name}}
