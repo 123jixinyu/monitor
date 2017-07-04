@@ -123,7 +123,7 @@ return [
         [
             'text' => '监控图表',
             'icon' => 'line-chart',
-            'url' => ''
+            'url' => 'chart_index'
         ],
         [
             'text' => '个人设置',

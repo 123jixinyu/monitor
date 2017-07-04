@@ -16,6 +16,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'IndexController@index')->name('index');
     Route::get('monitor_index', 'MonitorController@index')->name('monitor_index');
     Route::get('group_index', 'SendController@index')->name('monitor_index');
+    Route::get('chart_index', 'ChartController@index')->name('chart_index');
 
     //用户监控相关路由
     Route::get('get_monitor_types', 'MonitorTypeController@getMonitorTypes')->name('get_monitor_types');
