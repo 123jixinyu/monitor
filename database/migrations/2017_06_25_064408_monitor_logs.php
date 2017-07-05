@@ -15,9 +15,11 @@ class MonitorLogs extends Migration
         //通知人群表
         Schema::create('monitor_logs',function(Blueprint $table){
             $table->increments('id');
-            $table->tinyInteger('user_monitor_id')->index();
-            $table->string('title');
-            $table->text('content');
+            $table->integer('user_monitor_id')->index();
+            $table->integer('monitor_id')->index();
+            $table->string('monitor_type')->index();
+            $table->integer('user_id')->index();
+            $table->tinyInteger('status')->index()->default(0)->comment('0:异常');
             $table->timestamps();
         });
     }

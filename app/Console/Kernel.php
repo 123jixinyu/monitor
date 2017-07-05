@@ -18,10 +18,6 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\Inspire::class,
-        Sphinx::class,
-        Mysql::class,
-        Http::class,
-        Redis::class
     ];
 
     /**
@@ -32,11 +28,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        if(config('monitor.switch')){
-            $schedule->command('monitor:sphinx')->everyMinute();//监控sphinx
-            $schedule->command('monitor:mysql')->everyMinute();//监控mysql
-            $schedule->command('monitor:http')->everyMinute();//监控nginx
-            $schedule->command('monitor:redis')->everyMinute();//监控redis
-        }
+        $schedule->command('')->everyMinute();
     }
 }
