@@ -25,6 +25,7 @@ class UserMonitors extends Migration
             $table->tinyInteger('status')->index()->default(0)->comment('0:正常 1:异常');
             $table->string('remark')->nullable();
             $table->tinyInteger('is_open')->default(0)->index();
+            $table->tinyInteger('freq')->default(1)->comment('1:分钟 5：分钟 10：分钟');
             $table->timestamps();
         });
     }

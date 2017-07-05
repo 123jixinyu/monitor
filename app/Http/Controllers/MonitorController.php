@@ -22,7 +22,7 @@ class MonitorController extends Controller
     public function index(Request $request, UserMonitor $userMonitor)
     {
         return view('monitor.index')->with([
-            'monitors' => $userMonitor->where('user_id',Auth::user()->id)->paginate()
+            'monitors' => $userMonitor->where('user_id', Auth::user()->id)->paginate()
         ]);
     }
 
@@ -34,7 +34,8 @@ class MonitorController extends Controller
      */
     public function save(Request $request, UserMonitor $userMonitor)
     {
-        $validator = Validator::make($request->all(), [
+        $params = $request->all();
+        $validator = Validator::make($params, [
             'id' => 'exists:user_monitors,id',
             'monitor_id' => 'required|exists:monitor_types,id',
             'group_id' => 'required|exists:sender_groups,id',
@@ -43,25 +44,31 @@ class MonitorController extends Controller
             'timeout' => 'required|integer|between:1,5',
             'times' => 'required|integer|between:1,5',
             'is_open' => 'required|in:0,1',
-            'remark'=>'between:0,50'
+            'freq' => 'required',
+            'remark' => 'between:0,50'
         ]);
         if ($validator->fails()) {
             return api_response('400', $validator->errors()->first());
         }
+        if (!in_array(array_get($params, 'freq'), config('monitor.freq'))) {
+            return api_response('400', '参数错误');
+        }
+
         $attributes = $request->all();
         $attributes['user_id'] = Auth::user()->id;
-        if(isset($attributes['id'])){
-            $userMonitor=UserMonitor::find($attributes['id']);
+        if (isset($attributes['id'])) {
+            $userMonitor = UserMonitor::find($attributes['id']);
         }
-        $userMonitor->user_id=$attributes['user_id'];
-        $userMonitor->monitor_id=$attributes['monitor_id'];
-        $userMonitor->group_id=$attributes['group_id'];
-        $userMonitor->host=$attributes['host'];
-        $userMonitor->port=$attributes['port'];
-        $userMonitor->timeout=$attributes['timeout'];
-        $userMonitor->times=$attributes['times'];
-        $userMonitor->is_open=$attributes['is_open'];
-        $userMonitor->remark=$attributes['remark'];
+        $userMonitor->user_id = $attributes['user_id'];
+        $userMonitor->monitor_id = $attributes['monitor_id'];
+        $userMonitor->group_id = $attributes['group_id'];
+        $userMonitor->host = $attributes['host'];
+        $userMonitor->port = $attributes['port'];
+        $userMonitor->timeout = $attributes['timeout'];
+        $userMonitor->times = $attributes['times'];
+        $userMonitor->is_open = $attributes['is_open'];
+        $userMonitor->remark = $attributes['remark'];
+        $userMonitor->freq = $attributes['freq'];
         $userMonitor->save();
         return api_response('200', 'success', $userMonitor);
     }
@@ -90,15 +97,16 @@ class MonitorController extends Controller
      * @param Request $request
      * @return string
      */
-    public function delete(Request $request){
-        $validator=Validator::make($request->all(),[
-            'id'=>'required|exists:user_monitors,id'
+    public function delete(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|exists:user_monitors,id'
         ]);
         if ($validator->fails()) {
             return api_response('400', 'parameter_err');
         }
         $id = $request->input('id');
-        UserMonitor::where('user_id',Auth::user()->id)->where('id',$id)->delete();
+        UserMonitor::where('user_id', Auth::user()->id)->where('id', $id)->delete();
         return api_response('200', 'success');
     }
 
@@ -107,19 +115,20 @@ class MonitorController extends Controller
      * @param Request $request
      * @return string
      */
-    public function openHandle(Request $request){
-        $validator=Validator::make($request->all(),[
-            'id'=>'required|exists:user_monitors,id'
+    public function openHandle(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|exists:user_monitors,id'
         ]);
         if ($validator->fails()) {
             return api_response('400', 'parameter_err');
         }
         $id = $request->input('id');
-        $userMonitor=UserMonitor::where('user_id',Auth::user()->id)->where('id',$id)->first();
-        if(!$userMonitor){
+        $userMonitor = UserMonitor::where('user_id', Auth::user()->id)->where('id', $id)->first();
+        if (!$userMonitor) {
             return api_response('400', 'parameter_err');
         }
-        $userMonitor->is_open=$userMonitor->is_open?0:1;
+        $userMonitor->is_open = $userMonitor->is_open ? 0 : 1;
         $userMonitor->save();
         return api_response('200', 'success');
     }

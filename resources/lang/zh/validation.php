@@ -23,7 +23,7 @@ return [
     'digits'               => ':attribute 必须是 :digits 位',
     'digits_between'       => ':attribute 必须在 :min and :max 位之间',
     'email'                => ':attribute 必须是一个合法的电子邮件地址。',
-    'filled'               => ':attribute 的字段是必填的',
+    'filled'               => ':attribute 是必填的',
     'exists'               => '选定的 :attribute 是无效的',
     'image'                => ':attribute 必须是一个图片 (jpeg, png, bmp 或者 gif)',
     'in'                   => '选定的 :attribute 是无效的',
@@ -46,13 +46,13 @@ return [
     'not_in'               => '选定的 :attribute 是无效的',
     'numeric'              => ':attribute 必须是数字',
     'regex'                => ':attribute 格式是无效的',
-    'required'             => ':attribute 字段必须填写',
+    'required'             => ':attribute 必须填写',
     'required_if'          => ':attribute 字段是必须的当 :other 是 :value',
     'required_unless'      => ':attribute field is required unless :other is in :values.',
-    'required_with'        => ':attribute 字段是必须的当 :values 是存在的',
-    'required_with_all'    => ':attribute 字段是必须的当 :values 是存在的',
-    'required_without'     => ':attribute 字段是必须的当 :values 是不存在的',
-    'required_without_all' => ':attribute 字段是必须的当 没有一个 :values 是存在的',
+    'required_with'        => ':attribute 是必须的当 :values 是存在的',
+    'required_with_all'    => ':attribute 是必须的当 :values 是存在的',
+    'required_without'     => ':attribute 是必须的当 :values 是不存在的',
+    'required_without_all' => ':attribute 是必须的当 没有一个 :values 是存在的',
     'same'                 => ':attribute 和 :other 必须匹配',
     'size'                 => [
         'numeric' => ':attribute 必须是 :size 位',
@@ -109,6 +109,9 @@ return [
         'name'=>'名称',
         'phone'=>'手机号',
         'type'=>'类型',
-        'id'=>'编号'
+        'id'=>'编号',
+        'group_id'=>'通知组',
+        'freq'=>'监控频率'
     ],
+
 ];

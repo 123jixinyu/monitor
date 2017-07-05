@@ -41,6 +41,7 @@
                                     <th>监控对象</th>
                                     <th>地址</th>
                                     <th>端口</th>
+                                    <th>监控频率</th>
                                     <th>请求超时设置</th>
                                     <th>触发事件</th>
                                     <th>通知组</th>
@@ -57,10 +58,11 @@
                                             <td>{{$monitor->monitorType->name}}</td>
                                             <td>{{$monitor->host}}</td>
                                             <td>{{$monitor->port}}</td>
+                                            <td>{{$monitor->freq}}分</td>
                                             <td>{{$monitor->timeout}}秒</td>
                                             <td>{{$monitor->times}}次</td>
                                             <td>{{$monitor->sendGroup->name}}</td>
-                                            <td>{{$monitor->remark}}</td>
+                                            <td>{{$monitor->remark?$monitor->remark:"无"}}</td>
                                             <td>{{$monitor->getStatus()}}</td>
                                             <td>{{$monitor->getOpen()}}</td>
                                             <td>
@@ -81,6 +83,7 @@
                                     <th>Monitor Object</th>
                                     <th>Address</th>
                                     <th>Port</th>
+                                    <th>Frequency</th>
                                     <th>Timeout</th>
                                     <th>Event</th>
                                     <th>Notify</th>
@@ -136,6 +139,15 @@
                                         <label class="required">端口</label>
                                         <input type="text" class="form-control" placeholder=""
                                                v-model="selected.default_port">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="required">监控频率</label>
+                                        <select class="form-control" v-model="selected_freq">
+                                            <option v-for="(freq,key) in monitor_freq" v-bind:value="freq">
+                                                @{{freq}}分
+                                            </option>
+                                        </select>
+
                                     </div>
                                     <div class="form-group">
                                         <label class="required">请求超时设置（单位秒）</label>
@@ -197,7 +209,16 @@
                 remark: '',
                 is_checked: 0,
                 token: "{{csrf_token()}}",
-                id: false
+                id: false,
+                freq:"{{json_encode(config('monitor.freq'))}}",
+                selected_freq:''
+            },
+            computed:{
+                monitor_freq:function(){
+                    var freq=JSON.parse(this.freq);
+                    this.selected_freq=freq[0];
+                    return freq;
+                }
             },
             mounted: function () {
                 _this = this;
@@ -237,7 +258,8 @@
                         timeout: _this.selected.default_timeout,
                         times: _this.selected.default_times,
                         remark: _this.remark,
-                        is_open: _this.is_checked ? 1 : 0
+                        is_open: _this.is_checked ? 1 : 0,
+                        freq: _this.selected_freq
                     };
                     if (_this.id) {
                         form_data.id = _this.id;
@@ -269,6 +291,7 @@
                                 _this.remark = detail.remark;
                                 _this.is_checked = detail ? true : false;
                                 _this.id = detail.id;
+                                _this.selected_freq=detail.freq;
                             }
                             $("#monitor-edit").modal();
                         }
