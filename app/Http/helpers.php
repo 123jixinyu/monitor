@@ -98,9 +98,9 @@ if (!function_exists('user_avatar')) {
      */
     function user_avatar()
     {
-        $avatar=Auth::user()->avatar;
-        if(!$avatar){
-            $avatar=asset('assets/images/user2-160x160.jpg');
+        $avatar = Auth::user()->avatar;
+        if (!$avatar) {
+            $avatar = asset('assets/images/user2-160x160.jpg');
         }
         return $avatar;
     }
@@ -112,14 +112,35 @@ if (!function_exists('user_name')) {
      */
     function user_name()
     {
-        $user=Auth::user();
-        $name=$user->name;
-        if(!$name){
-            $name=$user->email;
+        $user = Auth::user();
+        $name = $user->name;
+        if (!$name) {
+            $name = $user->email;
         }
         return $name;
     }
 }
+if (!function_exists('monitor_config')) {
+
+    /**
+     * 配置全局
+     * @return mixed
+     */
+    function monitor_config($key, $value = '')
+    {
+        $status = \App\Entities\Status::where('key', $key)->first();
+        if (!$status) {
+            return false;
+        }
+        if ($key && !$value) {
+            return $status->value;
+        }
+        $status->value = $value;
+        $status->save();
+        return $status;
+    }
+}
+
 
 
 

@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\Http;
+use App\Console\Commands\Monitor;
 use App\Console\Commands\Mysql;
 use App\Console\Commands\Redis;
 use App\Console\Commands\Sphinx;
@@ -18,6 +19,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\Inspire::class,
+        Monitor::class
     ];
 
     /**
@@ -28,6 +30,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('')->everyMinute();
+        $schedule->command('monitor:work')->everyMinute();
     }
 }
