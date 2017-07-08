@@ -8,12 +8,11 @@ class Email
 {
     public $message;
     public $subject;
-    public $config;
+    public $emails = [];
     public $mailer;
 
     public function __construct(Mailer $mailer)
     {
-        $this->config = config('monitor');
         $this->mailer = $mailer;
     }
 
@@ -22,8 +21,8 @@ class Email
         $this->mailer->raw($this->message, function (Message $message) {
             $message
                 ->subject($this->subject)
-                ->from($this->config['from']);
-            foreach ($this->config['to'] as $to) {
+                ->from(config('mail.from.address'));
+            foreach ($this->emails as $to) {
                 $message->to($to);
             }
         });
