@@ -15,6 +15,7 @@ class Status extends Migration
         //
         Schema::create('status', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id');
             $table->string('key')->default('')->index();
             $table->string('value')->default('')->index();
             $table->timestamps();
