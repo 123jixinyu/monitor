@@ -45,12 +45,16 @@ class Monitor extends Command
         //获取执行集合
         $monitors = $monitorRep->getExeMonitor();
         $this->info('当前执行集合数量', count($monitors));
+        $monitorRep->updateTimes('total_handle_times', count($monitors));
+
         $this->info('开始执行');
         foreach ($monitors as $key => $monitor) {
             $monitorRep->handle($monitor);
         }
         $this->info('执行异常数量', $monitorRep->err_num);
+        $monitorRep->updateTimes('err_times', $monitorRep->err_num);
         $this->info('执行成功数量', $monitorRep->suc_num);
+        $monitorRep->updateTimes('suc_times', $monitorRep->suc_num);
         $this->info('执行完毕');
     }
 

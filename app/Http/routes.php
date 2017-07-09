@@ -41,6 +41,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('save_user','UserController@save_user')->name('save_user');
 
 
+    //报表相关路由
+//    Route::get('get_week_data','ChartController@getWeekData')->name('get_week_data');
+
 });
 
 // 认证路由...

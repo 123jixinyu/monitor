@@ -142,5 +142,29 @@ if (!function_exists('monitor_config')) {
 }
 
 
+if (!function_exists('chart_totals')) {
+    /**
+     * 获取报表统计
+     * @return array
+     */
+    function chart_totals($key)
+    {
+        $chart = new \App\Repository\ChartRepository();
+        switch ($key) {
+            case 'stable':
+                return $chart->getStable();
+            case 'errors':
+                return $chart->getError();
+            case 'monitors':
+                return $chart->getMonitors();
+            case 'members';
+                return $chart->getMembers();
+            default:
+                return '';
+        }
+    }
+}
+
+
 
 

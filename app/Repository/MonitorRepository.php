@@ -19,6 +19,8 @@ class MonitorRepository
 
     public $suc_num = 0;//执行成功次数
 
+    public $is_send = 0;
+
     public $sender;
 
     public function __construct(SenderRepository $sender)
@@ -56,12 +58,12 @@ class MonitorRepository
      * 更新脚本执行次数
      * @return mixed
      */
-    public function updateTimes()
+    public function updateTimes($key = 'times', $value = 1)
     {
-        $status = Status::where('key', 'times')->first();
+        $status = Status::where('key', $key)->first();
         $this->times = $status->value;
-        if ($status->increment('value')) {
-            $this->times = $status->value + 1;
+        if ($status->increment('value', $value)) {
+            $this->times = $status->value + $value;
         };
         return $this->times;
     }
@@ -91,8 +93,11 @@ class MonitorRepository
         }
         //保存监控日志
         if (!$this->status) {
+            $count = MonitorLog::where('user_monitor_id', $this->monitor->id)->where('status', UserMonitor::STATUS_EXCEPTION)->count();
+            if (($count + 1) % $this->monitor->times == 0) {
+                $this->send();
+            }
             $this->saveMonitorLog();
-            $this->send();
         }
 
 
@@ -114,25 +119,27 @@ class MonitorRepository
      */
     public function saveMonitorLog()
     {
-
         $monitorLog = new MonitorLog();
         $monitorLog->user_monitor_id = $this->monitor->id;
         $monitorLog->monitor_id = $this->monitor->monitor_id;
         $monitorLog->monitor_type = $this->monitor->monitorType->name;
         $monitorLog->user_id = $this->monitor->user_id;
         $monitorLog->status = $this->getStatus();
+        $monitorLog->host=$this->monitor->host;
+        $monitorLog->port=$this->monitor->port;
+        $monitorLog->group_name=$this->monitor->sendGroup->name;
+        $monitorLog->is_send = $this->is_send;
         $monitorLog->save();
 
     }
+
     /**
      * 消息通知
      */
     public function send()
     {
-        $count = MonitorLog::where('user_monitor_id', $this->monitor->id)->where('status', UserMonitor::STATUS_EXCEPTION)->count();
-        if (($count + 1) % $this->monitor->times == 0) {
-            $this->sender->userMonitor = $this->monitor;
-            $this->sender->send();
-        }
+        $this->is_send = MonitorLog::IS_SEND_YES;
+        $this->sender->userMonitor = $this->monitor;
+        $this->sender->send();
     }
 }
