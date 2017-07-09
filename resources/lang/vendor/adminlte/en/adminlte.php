@@ -8,7 +8,7 @@ return [
     'retype_password'             => '重复密码',
     'remember_me'                 => '记住我',
     'register'                    => '注册为会员',
-    'register_a_new_membership'   => '注册会员',
+    'register_a_new_membership'   => '注册',
     'i_forgot_my_password'        => '忘记密码?',
     'i_already_have_a_membership' => '我已经有账号',
     'sign_in'                     => '登录',
