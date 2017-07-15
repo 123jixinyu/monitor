@@ -21,7 +21,14 @@
         <!-- DataTables -->
         <link rel="stylesheet" href="//cdn.datatables.net/v/bs/dt-1.10.13/datatables.min.css">
     @endif
-
+    <style>
+        .login-logo b{
+            color:#777777;
+        }
+        .login-page, .register-page {
+            background-image: url(http://www.server.app/assets/images/back.png);
+        }
+    </style>
     @yield('adminlte_css')
 
     <!--[if lt IE 9]>
