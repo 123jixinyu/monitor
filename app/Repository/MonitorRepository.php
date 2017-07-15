@@ -107,18 +107,21 @@ class MonitorRepository
         $log = MonitorLog::where('user_monitor_id', $this->monitor->id)
             ->where('status', UserMonitor::STATUS_EXCEPTION)
             ->where('created_at', '>', $no_time)->first();
+        //判断是否发送邮件
+        $is_notify = false;
+        $count = MonitorLog::where('user_monitor_id', $this->monitor->id)->where('status', UserMonitor::STATUS_EXCEPTION)->count();
+        if (($count + 1) % $this->monitor->times == 0) {
+            $is_notify = true;
+        }
         if (!$this->status) {
-            $count = MonitorLog::where('user_monitor_id', $this->monitor->id)->where('status', UserMonitor::STATUS_EXCEPTION)->count();
-            if (($count + 1) % $this->monitor->times == 0) {
-                //不连续发送警告
-                if (!$log) {
-                    $this->send('monitor.error_subject', $this->getErrorEmailInfo());
-                }
+            //不连续发送警告
+            if (!$log && $is_notify) {
+                $this->send('monitor.error_subject', $this->getErrorEmailInfo());
             }
             $this->saveMonitorLog();
         } else {
             //恢复通知
-            if ($log) {
+            if ($log && $is_notify) {
                 $this->send(config('monitor.resume_subject'), $this->getResumeEmailInfo());
             }
         }
@@ -168,13 +171,14 @@ class MonitorRepository
     public function getErrorEmailInfo()
     {
         $msg = '';
-        $msg.= '站点监控:监控服务器('.$this->monitor->host.'.'.$this->monitor->port.')'.'发生异常。';
+        $msg .= '站点监控:监控服务器(' . $this->monitor->host . '.' . $this->monitor->port . ')' . '发生异常。';
         return $msg;
     }
 
-    public function getResumeEmailInfo(){
+    public function getResumeEmailInfo()
+    {
         $msg = '';
-        $msg.= '站点监控:监控服务器('.$this->monitor->host.'.'.$this->monitor->port.')'.'已恢复正常';
+        $msg .= '站点监控:监控服务器(' . $this->monitor->host . '.' . $this->monitor->port . ')' . '已恢复正常';
         return $msg;
     }
 }
