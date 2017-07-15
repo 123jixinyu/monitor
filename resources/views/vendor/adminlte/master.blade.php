@@ -31,6 +31,9 @@
         .btn-primary{
             background-color: #605CA8;
         }
+        a{
+            color: #605ca8;
+        }
         .btn-primary:hover{
             background-color: #434089;
         }
