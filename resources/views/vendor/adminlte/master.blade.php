@@ -28,6 +28,12 @@
         .login-page, .register-page {
             background-image: url(http://www.server.app/assets/images/back.png);
         }
+        .btn-primary{
+            background-color: #605CA8;
+        }
+        .btn-primary:hover{
+            background-color: #434089;
+        }
     </style>
     @yield('adminlte_css')
 
