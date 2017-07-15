@@ -168,15 +168,13 @@ class MonitorRepository
     public function getErrorEmailInfo()
     {
         $msg = '';
-        $msg.='<pre>'.
-            '站点监控:监控服务器('.$this->monitor->host.'.'.$this->monitor->port.')'.'发生异常。</pre>';
+        $msg.= '站点监控:监控服务器('.$this->monitor->host.'.'.$this->monitor->port.')'.'发生异常。';
         return $msg;
     }
 
     public function getResumeEmailInfo(){
         $msg = '';
-        $msg.='<pre>'.
-            '站点监控:监控服务器('.$this->monitor->host.'.'.$this->monitor->port.')'.'已恢复正常。</pre>';
+        $msg.= '站点监控:监控服务器('.$this->monitor->host.'.'.$this->monitor->port.')'.'已恢复正常';
         return $msg;
     }
 }
