@@ -110,7 +110,7 @@ class MonitorRepository
                     ->where('is_send',MonitorLog::IS_SEND_YES)
                     ->where('created_at','>',date('Y-m-d H:i:s',strtotime('-1 hours')))->first();
                 if(!$log){
-                    $this->send('monitor.error_subject', $this->getErrorEmailInfo());
+                    $this->send(config('monitor.error_subject'), $this->getErrorEmailInfo());
                 }
             }
             $this->saveMonitorLog();
