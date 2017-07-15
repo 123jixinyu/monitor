@@ -13,6 +13,9 @@
 Route::group(['middleware' => ['auth']], function () {
     App::setLocale('zh');
 
+    Route::get('p',function(){
+        return view('p');
+    });
     Route::get('/', 'IndexController@index')->name('index');
     Route::get('monitor_index', 'MonitorController@index')->name('monitor_index');
     Route::get('group_index', 'SendController@index')->name('monitor_index');
