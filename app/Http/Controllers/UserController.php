@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Status;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -58,6 +59,22 @@ class UserController extends Controller
         $user->experience = array_get($params, 'experience');
         $user->skills = array_get($params, 'skills');
         $user->save();
+        return api_response('200', 'success');
+    }
+
+    /**
+     * 确认报警信息
+     * @param Request $request
+     * @return string
+     */
+    public function confirm(Request $request)
+    {
+        $status = Status::where('user_id', Auth::user()->id)->first();
+        if (!$status) {
+            return api_response('200', 'success');
+        }
+        $status->confirm_times = $status->err_times;
+        $status->save();
         return api_response('200', 'success');
     }
 }

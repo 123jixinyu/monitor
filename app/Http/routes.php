@@ -39,10 +39,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('user_setting','UserController@index')->name('user_setting');
     Route::post('upload_avatar','UserController@uploadAvatar')->name('upload_avatar');
     Route::post('save_user','UserController@save_user')->name('save_user');
-
+    Route::get('user_confirm', 'UserController@confirm')->name('user_confirm');
 
     //报表相关路由
-//    Route::get('get_week_data','ChartController@getWeekData')->name('get_week_data');
 
 });
 

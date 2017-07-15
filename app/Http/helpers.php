@@ -145,5 +145,16 @@ if (!function_exists('chart_totals')) {
 }
 
 
+if (!function_exists('get_confirm_times')) {
+
+    function get_confirm_times()
+    {
+        $status=\App\Entities\Status::where('user_id',Auth::user()->id)->first();
+        if(!$status){
+            return 0;
+        }
+        return $status->err_times-$status->confirm_times;
+    }
+}
 
 

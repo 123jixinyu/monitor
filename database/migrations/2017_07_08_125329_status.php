@@ -19,6 +19,7 @@ class Status extends Migration
             $table->integer('times')->default(0)->index();
             $table->integer('suc_times')->default(0)->index();
             $table->integer('err_times')->default(0)->index();
+            $table->integer('confirm_times')->default(0)->index();
             $table->timestamps();
         });
 

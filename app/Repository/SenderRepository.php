@@ -18,15 +18,15 @@ class SenderRepository
     /**
      * 发送通知
      */
-    public function send()
+    public function send($subject,$message)
     {
         $notifies = $this->getPeopleNotify();
         foreach ($notifies as $key => $notify) {
             if ($key == SenderPeople::TYPE_EMAIL) {
                 $emails = $notify->pluck('email')->all();
                 $this->email->emails = $emails;
-                $this->email->subject = '异常';
-                $this->email->message = 'xxxx';
+                $this->email->subject = $subject;
+                $this->email->message = $message;
                 $this->email->send();
             }
         }

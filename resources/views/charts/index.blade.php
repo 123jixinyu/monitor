@@ -110,7 +110,7 @@
             <!-- /.row -->
 
             <!-- Main row -->
-            <div class="row">
+            <div class="row" id="recently-error-information">
                 <!-- Left col -->
                 <div class="col-md-12">
                     <!-- TABLE: LATEST ORDERS -->
