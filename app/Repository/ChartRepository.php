@@ -4,6 +4,7 @@ namespace App\Repository;
 use App\Entities\MonitorLog;
 use App\Entities\SenderGroups;
 use App\Entities\SenderPeople;
+use App\Entities\Status;
 use App\Entities\UserMonitor;
 use Auth;
 use DB;
@@ -28,11 +29,12 @@ class ChartRepository
      */
     public function getStable()
     {
-        $total = monitor_config('total_handle_times');
-        if (!$total) {
+        $status = Status::where('user_id',Auth::user()->id)->first();
+        if (!$status) {
             return '100%';
         }
-        $err = monitor_config('err_times');
+        $total=$status->times;
+        $err = $status->err_times;
         return round((1 - $err / $total) * 100, 2) . '%';
     }
 

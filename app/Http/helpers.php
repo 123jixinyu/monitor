@@ -120,27 +120,6 @@ if (!function_exists('user_name')) {
         return $name;
     }
 }
-if (!function_exists('monitor_config')) {
-
-    /**
-     * 配置全局
-     * @return mixed
-     */
-    function monitor_config($key, $value = '')
-    {
-        $status = \App\Entities\Status::where('key', $key)->first();
-        if (!$status) {
-            return false;
-        }
-        if ($key && !$value) {
-            return $status->value;
-        }
-        $status->value = $value;
-        $status->save();
-        return $status;
-    }
-}
-
 
 if (!function_exists('chart_totals')) {
     /**

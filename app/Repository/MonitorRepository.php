@@ -19,7 +19,7 @@ class MonitorRepository
 
     public $suc_num = 0;//执行成功次数
 
-    public $is_send = 0;
+    public $is_send = 0;//是否发送消息
 
     public $sender;
 
@@ -58,14 +58,21 @@ class MonitorRepository
      * 更新脚本执行次数
      * @return mixed
      */
-    public function updateTimes($key = 'times', $value = 1)
+    public function updateTimes()
     {
-        $status = Status::where('key', $key)->first();
-        $this->times = $status->value;
-        if ($status->increment('value', $value)) {
-            $this->times = $status->value + $value;
-        };
-        return $this->times;
+        $status = Status::where('user_id', $this->monitor->user_id)->first();
+        if (!$status) {
+            $status = new Status();
+            $status->user_id = $this->monitor->user_id;
+            $status->times = 0;
+            $status->suc_times = 0;
+            $status->err_times = 0;
+
+        }
+        $status->times += 1;
+        $status->suc_times += $this->status ? 1 : 0;
+        $status->err_times += $this->status ? 0 : 1;
+        return $status->save();
     }
 
     /**
@@ -85,12 +92,14 @@ class MonitorRepository
     {
         //更新监控状态
         $this->updateStatus();
-        //更新成功和失败次数
+        //更新总成功和失败次数
         if ($this->status) {
             $this->suc_num += 1;
         } else {
             $this->err_num += 1;
         }
+        //更新用户执行次数
+        $this->updateTimes();
         //保存监控日志
         if (!$this->status) {
             $count = MonitorLog::where('user_monitor_id', $this->monitor->id)->where('status', UserMonitor::STATUS_EXCEPTION)->count();
@@ -125,9 +134,9 @@ class MonitorRepository
         $monitorLog->monitor_type = $this->monitor->monitorType->name;
         $monitorLog->user_id = $this->monitor->user_id;
         $monitorLog->status = $this->getStatus();
-        $monitorLog->host=$this->monitor->host;
-        $monitorLog->port=$this->monitor->port;
-        $monitorLog->group_name=$this->monitor->sendGroup->name;
+        $monitorLog->host = $this->monitor->host;
+        $monitorLog->port = $this->monitor->port;
+        $monitorLog->group_name = $this->monitor->sendGroup->name;
         $monitorLog->is_send = $this->is_send;
         $monitorLog->save();
 
