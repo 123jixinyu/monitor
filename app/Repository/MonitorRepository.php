@@ -101,12 +101,13 @@ class MonitorRepository
         //更新用户执行次数
         $this->updateTimes();
 
-        //查询报警信息
-        $no_time = time() - ($this->monitor->freq * $this->monitor->times * 60 + $this->monitor->freq / 2 * 60);
-        $no_time = date('Y-m-d H:i:s', $no_time);
+        //查询最后一次报警信息
+        $logError=false;
         $log = MonitorLog::where('user_monitor_id', $this->monitor->id)
-            ->where('status', UserMonitor::STATUS_EXCEPTION)
-            ->where('created_at', '>', $no_time)->first();
+            ->orderBy('id','desc')->first();
+        if($log&&$log->status==UserMonitor::STATUS_EXCEPTION){
+            $logError=true;
+        }
         //判断是否发送邮件
         $is_notify = false;
         $count = MonitorLog::where('user_monitor_id', $this->monitor->id)->where('status', UserMonitor::STATUS_EXCEPTION)->count();
@@ -114,17 +115,20 @@ class MonitorRepository
             $is_notify = true;
         }
         if (!$this->status) {
-            //不连续发送警告
-            if (!$log && $is_notify) {
+            //如果最后一次为正常，当前发生异常，则发送警告（防止重复发送）
+            if (!$logError && $is_notify) {
+                $this->saveMonitorLog();
                 $this->send('monitor.error_subject', $this->getErrorEmailInfo());
             }
-            $this->saveMonitorLog();
         } else {
-            //恢复通知
-            if ($log && $is_notify) {
+            //如果最后一次为异常，当前恢复正常，则发送恢复正常通知
+            if ($logError && $is_notify) {
+                //保存正常状态（下次将不会重复发送）
+                $this->saveMonitorLog();
                 $this->send(config('monitor.resume_subject'), $this->getResumeEmailInfo());
             }
         }
+
     }
 
     /**
