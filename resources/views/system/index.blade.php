@@ -90,7 +90,7 @@
                         <div>剩余内存</div>
                         <input type="text" class="knob" value="30" data-width="90" data-height="90"
                                data-fgColor="#932AB6">
-                        <div class="knob-label">物理内存@{{sysInfo.memTotal}} GB，剩余@{{sysInfo.memFree}}GB</div>
+                        <div class="knob-label">物理内存@{{sysInfo.memTotal}} GB，已使用@{{sysInfo.memFree}}GB</div>
                     </div>
                     <div class="text-center col-md-3">
                         <div>Cache已使用</div>
