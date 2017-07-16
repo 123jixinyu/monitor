@@ -1,0 +1,1 @@
+点此链接去重置 <a href="{{url('password/reset',['token'=>$token])}}">{{url('password/reset',['token'=>$token])}}</a>
