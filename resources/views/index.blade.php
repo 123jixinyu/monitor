@@ -92,7 +92,7 @@ vendor目录包含Composer依赖；</code></pre>
             <li>2.安装依赖composer install</li>
             <li>3.拷贝 .env.example到.env,并修改.env配置，建立相应数据库</li>
             <li>4.运行php artisan migrate初始化表，然后运行php artisan key:generate,生成key</li>
-            <li>5.运行php artisan db:seed --class=monitorTypeSeeder初始化数据</li>
+            <li>5.运行composer dump-autoload  然后再运行php artisan db:seed初始化数据</li>
             <li>6.配置nginx映射到public 目录下，并且设置storage以及bootstrap目录权限。</li>
             <li>7.将/usr/bin/php xxxxx/monitor/artisan schedule:run 加到crontab中去</li>
         </ul>

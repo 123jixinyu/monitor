@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class monitorTypeSeeder extends Seeder
+class MonitorTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
