@@ -143,7 +143,7 @@
                           _this.num = _this.sysInfo.cpu.num;
                           _this.model = _this.sysInfo.cpu.model;
                           $(".knob").eq(0).attr('value', _this.free_space_percent);
-                          $(".knob").eq(1).attr('value', _this.mem_percent);
+                          $(".knob").eq(1).attr('value', _this.sysInfo.memPercent);
                           $(".knob").eq(2).attr('value', _this.sysInfo.memCachedPercent.toFixed(2));
                           $(".knob").eq(3).attr('value', _this.sysInfo.memRealPercent);
                           $(".knob").knob({});
@@ -155,10 +155,6 @@
                 free_space_percent: function () {
                     _this = this;
                     return (_this.sysInfo.disk_free_space / _this.sysInfo.disk_total_space * 100).toFixed(2);
-                },
-                mem_percent: function () {
-                    _this = this;
-                    return (_this.sysInfo.memFree / _this.sysInfo.memTotal * 100).toFixed(2);
                 },
                 real_space_percent: function () {
                     _this = this;
