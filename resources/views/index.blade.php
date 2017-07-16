@@ -40,7 +40,11 @@
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <p>需要git克隆后，然后安装所需依赖。（建议）</p>
+<<<<<<< HEAD
                         <a href="https://github.com/123jixinyu/monitor" class="btn btn-danger"><i class="fa fa-download"></i> Download</a>
+=======
+                        <a href="#" class="btn btn-danger"><i class="fa fa-download"></i> Download</a>
+>>>>>>> 6d459cdf3146d55cc144cbd16013a22f2d3c8a22
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
             </div><!-- /.col -->
