@@ -13,9 +13,6 @@
 Route::group(['middleware' => ['auth']], function () {
     App::setLocale('zh');
 
-    Route::get('p',function(){
-        return view('p');
-    });
     Route::get('/', 'IndexController@index')->name('index');
     Route::get('monitor_index', 'MonitorController@index')->name('monitor_index');
     Route::get('group_index', 'SendController@index')->name('monitor_index');
@@ -46,6 +43,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     //报表相关路由
 
+    //系统信息相关路由
+    Route::get('get_real_time_info', 'SystemController@getRealTimeInfo')->name('get_real_time_info');
 });
 
 // 认证路由...
