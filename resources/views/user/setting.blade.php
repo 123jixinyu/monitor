@@ -38,6 +38,26 @@
                 </div>
             </form>
         </div>
+
+        <!-- 修改成功后弹窗提示 -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">个人设置修改</h4>
+              </div>
+              <div class="modal-body">
+                <p>恭喜您！修改成功！</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="window.location.reload();">确定</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
     </div>
 @endsection
 @section('js')
@@ -54,7 +74,8 @@
                     _this=this;
                     _this.$http.post('save_user',{_token:_this.token,experience:_this.experience,skills:_this.skills}).then(function(res){
                         if(res.data.code=='200'){
-                            window.location.reload();
+			    $('#dialog').modal();
+                          //  window.location.reload();
                         }else{
                             dialog.show(res.data.msg);
                         }
