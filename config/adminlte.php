@@ -131,6 +131,11 @@ return [
             'url' => 'system_index'
         ],
         [
+            'text' => '终端控制',
+            'icon' => 'terminal',
+            'url' => 'terminal_index'
+        ],
+        [
             'text' => '个人设置',
             'url' => 'user_setting',
             'icon' => 'user',
