@@ -40,7 +40,7 @@
         </div>
 
         <!-- 修改成功后弹窗提示 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="dialog">
+        <div class="modal fade" tabindex="-1" role="dialog" id="dialog_user">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -74,7 +74,7 @@
                     _this=this;
                     _this.$http.post('save_user',{_token:_this.token,experience:_this.experience,skills:_this.skills}).then(function(res){
                         if(res.data.code=='200'){
-			    $('#dialog').modal();
+			    $('#dialog_user').modal();
                           //  window.location.reload();
                         }else{
                             dialog.show(res.data.msg);
