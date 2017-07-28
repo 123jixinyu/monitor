@@ -4,25 +4,27 @@
 
         .login-page, .register-page {
             /*background: #ffffff;*/
-            background-image: url('{{asset('assets/images/back.png')}}');
+            background-color: #605CA8;
         }
 
         .login-box-msg {
             color: #313131;
         }
 
-        .btn-info,
-        .btn-info.disabled {
-            background: #2cabe3;
+        .btn-info, .btn-info.disabled {
+            background:#6C67B9;
             border: 1px solid #2cabe3;
+        }
+        .btn-info:hover{
+            background:#605CA8;
         }
 
         .btn-rounded {
             border-radius: 60px;
         }
-        .login-logo b{
-            color:#777777;
-        }
+        /*.login-logo b{*/
+            /*color:#777777;*/
+        /*}*/
         #particles-js {
             position: absolute;
             width: 100%;
@@ -31,15 +33,18 @@
             background-image: url("");
             background-repeat: no-repeat;
             background-size: cover;
+            top:0;
         }
-        html,body{
-            background-color:#605CA8;
+        .login-box{
+            position: relative;
         }
+        /*form label{*/
+            /*color:gainsboro;*/
+            /*font-size: 15px;;*/
+        /*}*/
     </style>
 @endsection
-<div id="particles-js">
 @extends('adminlte::login')
-</div>
 @section('js')
     <script src="{{asset('assets/js/vector.js')}}"></script>
     <script src="{{asset('assets/js/particles.min.js')}}"></script>
@@ -156,24 +161,5 @@
         });
 
 
-        /* ---- stats.js config ---- */
-
-        var count_particles, stats, update;
-        stats = new Stats;
-        stats.setMode(0);
-        stats.domElement.style.position = 'absolute';
-        stats.domElement.style.left = '0px';
-        stats.domElement.style.top = '0px';
-        document.body.appendChild(stats.domElement);
-        count_particles = document.querySelector('.js-count-particles');
-        update = function() {
-            stats.begin();
-            stats.end();
-            if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
-                count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
-            }
-            requestAnimationFrame(update);
-        };
-        requestAnimationFrame(update);
     </script>
 @endsection

@@ -9,6 +9,8 @@
 @section('body_class', 'login-page')
 
 @section('body')
+    <div id="particles-js" style="top: 0px;">
+    </div>
     <div id="login-container">
         <div id="login-output">
             <div class="login-box">
