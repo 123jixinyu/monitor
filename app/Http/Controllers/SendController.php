@@ -65,12 +65,12 @@ class SendController extends Controller
     public function getGroupDetail(Request $request)
     {
         $params = $request->all();
-//        $validator = Validator::make($params, [
-//            'id' => 'required|exists:sender_groups,id'
-//        ]);
-//        if ($validator->fails()) {
-//            return api_response('400', $validator->errors()->first());
-//        }
+        $validator = Validator::make($params, [
+            'id' => 'required|exists:sender_groups,id'
+        ]);
+        if ($validator->fails()) {
+            return api_response('400', $validator->errors()->first());
+        }
         $user_id = Auth::user()->id;
         $id = array_get($params, 'id');
         return api_response('200', 'success', SenderGroups::where('user_id', $user_id)->where('id', $id)->first());
