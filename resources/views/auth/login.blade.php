@@ -38,10 +38,9 @@
         .login-box{
             position: relative;
         }
-        /*form label{*/
-            /*color:gainsboro;*/
-            /*font-size: 15px;;*/
-        /*}*/
+        .icheckbox_square-blue, .iradio_square-blue{
+            background: url('{{asset('assets/images/purple.png')}}') no-repeat;
+        }
     </style>
 @endsection
 @extends('adminlte::login')
