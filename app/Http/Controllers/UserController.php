@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Validator;
 use Auth;
+use Hash;
 
 class UserController extends Controller
 {
@@ -75,6 +76,42 @@ class UserController extends Controller
         }
         $status->confirm_times = $status->err_times;
         $status->save();
+        return api_response('200', 'success');
+    }
+
+    /**
+     * 显示修改密码页面
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function passwordIndex()
+    {
+        return view('user.password');
+    }
+
+
+    public function savePwd(Request $request)
+    {
+        $params = $request->all();
+        $validator = Validator::make($params, [
+            'old' => 'required',
+            'new_pwd' => 'required|between:6,16|confirmed',
+        ], [
+            'old.required' => '原密码必须填写',
+            'new_pwd.required' => '新密码必须填写',
+            'new_pwd.between' => '新密码长度必须在6～16位之间',
+            'new_pwd.confirmed' => '重复密码不正确',
+        ]);
+        if ($validator->fails()) {
+            return api_response('400', $validator->errors()->first());
+        }
+        $old = array_get($params, 'old');
+        $new_pwd = array_get($params, 'new_pwd');
+        if (!Hash::check($old, Auth::user()->password)) {
+            return api_response('400', '原有密码错误');
+        }
+        $user=Auth::user();
+        $user->password=Hash::make($new_pwd);
+        $user->save();
         return api_response('200', 'success');
     }
 }

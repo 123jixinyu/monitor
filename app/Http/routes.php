@@ -19,6 +19,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('chart_index', 'ChartController@index')->name('chart_index');
     Route::get('system_index','SystemController@index')->name('system_index');
     Route::get('terminal_index','TerminalController@index')->name('terminal_index');
+    Route::get('password_index','UserController@passwordIndex')->name('password_index');
 
 
     //用户监控相关路由
@@ -43,6 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('upload_avatar','UserController@uploadAvatar')->name('upload_avatar');
     Route::post('save_user','UserController@save_user')->name('save_user');
     Route::get('user_confirm', 'UserController@confirm')->name('user_confirm');
+    Route::post('save_pwd','UserController@savePwd')->name('save_pwd');
 
     //报表相关路由
 

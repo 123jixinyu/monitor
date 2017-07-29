@@ -136,9 +136,19 @@ return [
             'url' => 'terminal_index'
         ],
         [
+            'text' => '成员管理',
+            'url' => 'user_setting',
+            'icon' => 'child',
+        ],
+        [
             'text' => '个人设置',
             'url' => 'user_setting',
             'icon' => 'user',
+        ],
+        [
+            'text' => '修改密码',
+            'url' => 'password_index',
+            'icon' => 'lock',
         ],
     ],
 
