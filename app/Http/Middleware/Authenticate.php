@@ -2,9 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\User;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
-
+use Auth;
 class Authenticate
 {
     /**
@@ -41,7 +42,14 @@ class Authenticate
                 return redirect()->guest('auth/login');
             }
         }
-
+        $user=Auth::user();
+        if($user->login_status==User::LOGIN_STATUS_FORBIDDEN){
+            Auth::logout();
+            return redirect(route('post_auth_login'))
+                ->withErrors([
+                    'email' => '你已经被禁止登录！',
+                ]);
+        }
         return $next($request);
     }
 }

@@ -46,6 +46,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('save_user','UserController@save_user')->name('save_user');
     Route::get('user_confirm', 'UserController@confirm')->name('user_confirm');
     Route::post('save_pwd','UserController@savePwd')->name('save_pwd');
+    Route::post('set_login','UserController@setLoginStatus')->name('set_login');
+    Route::post('del_user','UserController@delMember')->name('del_user');
 
     //报表相关路由
 

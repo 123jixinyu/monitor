@@ -107,9 +107,9 @@ class MonitorRepository
             if (($count + 1) % $this->monitor->times == 0) {
                 $log = MonitorLog::where('user_monitor_id', $this->monitor->id)
                     ->where('status', UserMonitor::STATUS_EXCEPTION)
-                    ->where('is_send',MonitorLog::IS_SEND_YES)
-                    ->where('created_at','>',date('Y-m-d H:i:s',strtotime('-1 hours')))->first();
-                if(!$log){
+                    ->where('is_send', MonitorLog::IS_SEND_YES)
+                    ->where('created_at', '>', date('Y-m-d H:i:s', strtotime('-1 hours')))->first();
+                if (!$log) {
                     $this->send(config('monitor.error_subject'), $this->getErrorEmailInfo());
                 }
             }
@@ -117,8 +117,8 @@ class MonitorRepository
         } else {
             //如果最后一次为异常，当前恢复正常，则发送恢复正常通知
             $log = MonitorLog::where('user_monitor_id', $this->monitor->id)
-                ->orderBy('id','desc')->first();
-            if($log&&$log->status==UserMonitor::STATUS_EXCEPTION){
+                ->orderBy('id', 'desc')->first();
+            if ($log && $log->status == UserMonitor::STATUS_EXCEPTION) {
                 //保存正常状态（下次将不会重复发送）
                 $this->saveMonitorLog();
                 $this->send(config('monitor.resume_subject'), $this->getResumeEmailInfo());
@@ -180,5 +180,10 @@ class MonitorRepository
         $msg = '';
         $msg .= '站点监控:监控服务器(' . $this->monitor->host . '.' . $this->monitor->port . ')' . '已恢复正常';
         return $msg;
+    }
+
+    public function getMonitorCount($user)
+    {
+        return UserMonitor::where('user_id', $user->id)->count();
     }
 }

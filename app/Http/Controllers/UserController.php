@@ -120,10 +120,62 @@ class UserController extends Controller
         return api_response('200', 'success');
     }
 
+    /**
+     * 显示成员列表页
+     * @return $this
+     */
     public function memberIndex()
     {
         return view('user.member')->with([
-            'members'=>User::where('privilege',User::ADMIN_NO)->orderBy('created_at','desc')->paginate()
+            'members' => User::where('privilege', User::ADMIN_NO)->orderBy('created_at', 'desc')->paginate()
         ]);
+    }
+
+    /**
+     * 设置登录状态
+     * @param Request $request
+     * @return string
+     */
+    public function setLoginStatus(Request $request)
+    {
+        $params = $request->all();
+        $validator = Validator::make($params, [
+            'id' => 'required|exists:users,id'
+        ]);
+        if ($validator->fails()) {
+            return api_response('400', '请求设置的成员不存在');
+        }
+        $user = Auth::user();
+        if ($user->privilege != User::ADMIN_YES) {
+            return api_response('400', '非法请求');
+        }
+        $id = array_get($params, 'id');
+        $member = User::find($id);
+        $member->login_status = $member->login_status == User::LOGIN_STATUS_NORMAL ? User::LOGIN_STATUS_FORBIDDEN : User::LOGIN_STATUS_NORMAL;
+        $member->save();
+        return api_response('200', 'success');
+    }
+
+    /**
+     * 删除成员
+     * @param Request $request
+     * @return string
+     */
+    public function delMember(Request $request)
+    {
+        $params = $request->all();
+        $validator = Validator::make($params, [
+            'id' => 'required|exists:users,id'
+        ]);
+        if ($validator->fails()) {
+            return api_response('400', '请求设置的成员不存在');
+        }
+        $user = Auth::user();
+        if ($user->privilege != User::ADMIN_YES) {
+            return api_response('400', '非法请求');
+        }
+        $id = array_get($params, 'id');
+        $member = User::destroy($id);
+        return api_response('200', 'success');
     }
 }
