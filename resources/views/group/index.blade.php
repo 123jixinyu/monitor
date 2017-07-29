@@ -17,7 +17,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                FullMonitor
+                91 Monitor
                 <small>支持Nginx、Redis、MySQL、Sphinx等服务监控。</small>
             </h1>
             <ol class="list-inline pull-right">

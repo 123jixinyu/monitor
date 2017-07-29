@@ -5,9 +5,9 @@
 @section('content')
 
     <section id="introduction">
-        <h2 class="page-header"><a href="#introduction">FullMonitor简介</a></h2>
+        <h2 class="page-header"><a href="#introduction">91 Monitor简介</a></h2>
         <p class="lead">
-            <b>FullMonitor</b> 系统致力于监控服务器运行状态,作为一个开发人员，你是否会有这样的担心:我上线后的项目如果服务器挂了怎么办？如果mysql崩了怎么办？如果。。。。，这个时候你会想到如何监控服务器的运行状态，FullMonitor就是为你量身打造的服务器监控系统。
+            <b>91 Monitor</b> 系统致力于监控服务器运行状态,作为一个开发人员，你是否会有这样的担心:我上线后的项目如果服务器挂了怎么办？如果mysql崩了怎么办？如果。。。。，这个时候你会想到如何监控服务器的运行状态，91 Monitor就是为你量身打造的服务器监控系统。
         </p>
     </section><!-- /#introduction -->
 
@@ -17,7 +17,7 @@
     <section id="download">
         <h2 class="page-header"><a href="#download">下载</a></h2>
         <p class="lead">
-            FullMonitor现在提供两种下载方式，压缩包下载以及源码安装,其中压缩包为已经压缩好的项目，无需安装，但是建议使用源码安装。
+            91 Monitor现在提供两种下载方式，压缩包下载以及源码安装,其中压缩包为已经压缩好的项目，无需安装，但是建议使用源码安装。
         </p>
         <div class="row">
             <div class="col-sm-6">
@@ -71,7 +71,7 @@ vendor目录包含Composer依赖；</code></pre>
 
     <section id="dependencies">
         <h2 class="page-header"><a href="#dependencies">依赖</a></h2>
-        <p class="lead">FullMonitor主要依赖四个主要的框架，这些框架代码会在解压或者composer的时候一同下载，不需要独立安装。</p>
+        <p class="lead">91 Monitor主要依赖四个主要的框架，这些框架代码会在解压或者composer的时候一同下载，不需要独立安装。</p>
         <ul class="bring-up">
             <li><a href="https://laravel.com/">Laravel 5.1</a></li>
             <li><a href="https://adminlte.io/" target="_blank">Adminlte</a></li>
