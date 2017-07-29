@@ -102,7 +102,7 @@
                     </div>
                     <div class="text-center col-md-3">
                         <div>真实内存已使用</div>
-                        <input type="text" class="knob" value="30" data-width="90" data-height="90"
+                        <input type="text" class="knob test-knob" value="30" data-width="90" data-height="90"
                                data-fgColor="#00C0EF">
                         <div class="knob-label">真实内存使用@{{sysInfo.memRealUsed}} GB,真实内存空闲 @{{sysInfo.memRealFree}}
                             GB
@@ -139,14 +139,19 @@
                   _this=this;
                   _this.$http.get('{{route("get_real_time_info")}}').then(function (res) {
                       if (res.data.code == '200') {
+
                           _this.sysInfo = res.data.data.sysInfo;
                           _this.num = _this.sysInfo.cpu.num;
                           _this.model = _this.sysInfo.cpu.model;
-                          $(".knob").eq(0).attr('value', _this.free_space_percent);
-                          $(".knob").eq(1).attr('value', _this.sysInfo.memPercent);
-                          $(".knob").eq(2).attr('value', _this.sysInfo.memCachedPercent.toFixed(2));
-                          $(".knob").eq(3).attr('value', _this.sysInfo.memRealPercent);
-                          $(".knob").knob({});
+                          $(".knob").knob({
+                              readOnly: true
+                          });
+                          $(".knob").eq(0).val(_this.free_space_percent);
+                          $(".knob").eq(1).val(_this.sysInfo.memPercent);
+                          $(".knob").eq(2).val(_this.sysInfo.memCachedPercent.toFixed(2));
+                          $(".knob").eq(3).val(_this.sysInfo.memRealPercent);
+                          $(".knob").trigger('change');
+
                       }
                   });
               }

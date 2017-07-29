@@ -38,7 +38,7 @@
                                             <div class="input-group-btn">
                                                 <span class="btn btn-info" data-toggle="modal"
                                                       data-target="#monitor-user-edit"
-                                                      v-on:click="add_mem({{$group->id}})">添加成员</span>
+                                                      v-on:click="add_mem({{$group->id}},'{{$group->name}}')">添加成员</span>
                                                 <span class="btn btn-default" v-on:click="edit_group({{$group->id}})">修改组名</span>
                                                 <span class="btn btn-default" v-on:click="del_group({{$group->id}})">删除该分组</span>
                                             </div>
@@ -141,7 +141,7 @@
                                 <div class="box-body">
                                     <!-- Select multiple-->
                                     <div class="form-group">
-                                        <label>通知组:xxxxxxxxx</label>
+                                        <label>通知组:@{{group_name}}</label>
                                     </div>
                                     <div class="form-group">
                                         <label class="required">姓名</label>
@@ -193,6 +193,7 @@
             data: {
                 group: '',
                 group_id: false,
+                group_name:'',
                 token: '{{csrf_token()}}',
                 member_id: false,
                 member_name: '',
@@ -241,10 +242,12 @@
                         });
                     }
                 },
-                add_mem: function (g_id) {
+                add_mem: function (g_id,g_name) {
                     _this = this;
                     if (g_id) {
                         _this.group_id = g_id;
+                        _this.group_name=g_name;
+                        console.log(g_name);
                     }
                 },
                 save_mem: function () {
