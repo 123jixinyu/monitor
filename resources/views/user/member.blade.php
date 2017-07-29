@@ -48,7 +48,7 @@
                                         <tr>
                                             <td>{{$member->id}}</td>
                                             <td>{{$member->name}}</td>
-                                            <td>@if($member->avatar)<img src="{{$member->avatar}}@else 无 @endif"></td>
+                                            <td>@if($member->avatar)<img src="{{$member->avatar}}" style="width: 40px;height: 40px">@else 无 @endif</td>
                                             <td>{{$member->email}}</td>
                                             <td>{{$member->created_at}}</td>
                                             <td><a href="javascript:void(0)">禁止登录</a>&nbsp;<a href="javascript:void(0)">删除</a></td>
