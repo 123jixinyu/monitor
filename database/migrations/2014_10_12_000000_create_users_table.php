@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->nullable();
             $table->string('experience')->nullable();
             $table->string('skills')->nullable();
+            $table->integer('privilege')->default(0)->index()->comment('0:普通成员 1:管理员');
             $table->rememberToken();
             $table->timestamps();
         });

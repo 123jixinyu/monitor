@@ -137,7 +137,7 @@ return [
         ],
         [
             'text' => '成员管理',
-            'url' => 'user_setting',
+            'url' => 'member_index',
             'icon' => 'child',
         ],
         [
@@ -170,6 +170,7 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
+        \App\Repository\FilterRepository::class,
     ],
 
     /*
@@ -186,4 +187,7 @@ return [
     'plugins' => [
         'datatables' => true,
     ],
+    'admin_route'=>[
+        'system_index','terminal_index','member_index'
+    ]
 ];

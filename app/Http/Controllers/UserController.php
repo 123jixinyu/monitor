@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Status;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -88,7 +89,11 @@ class UserController extends Controller
         return view('user.password');
     }
 
-
+    /**
+     * 保存密码
+     * @param Request $request
+     * @return string
+     */
     public function savePwd(Request $request)
     {
         $params = $request->all();
@@ -109,9 +114,16 @@ class UserController extends Controller
         if (!Hash::check($old, Auth::user()->password)) {
             return api_response('400', '原有密码错误');
         }
-        $user=Auth::user();
-        $user->password=Hash::make($new_pwd);
+        $user = Auth::user();
+        $user->password = Hash::make($new_pwd);
         $user->save();
         return api_response('200', 'success');
+    }
+
+    public function memberIndex()
+    {
+        return view('user.member')->with([
+            'members'=>User::where('privilege',User::ADMIN_NO)->orderBy('created_at','desc')->paginate()
+        ]);
     }
 }

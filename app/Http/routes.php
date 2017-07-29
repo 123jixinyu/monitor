@@ -20,6 +20,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('system_index','SystemController@index')->name('system_index');
     Route::get('terminal_index','TerminalController@index')->name('terminal_index');
     Route::get('password_index','UserController@passwordIndex')->name('password_index');
+    Route::get('member_index','UserController@memberIndex')->name('member_index');
 
 
     //用户监控相关路由
