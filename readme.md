@@ -1,27 +1,51 @@
-## Laravel PHP Framework
+# 91 Monitor
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+**91 monitor**是一款专门为监控服务器状态的PHP开源系统。
+特点概述：支持监听各种服务器端口，以及web站点 , 并且支持终端控制
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+### 安装
+1. 克隆项目
+>
+`
+git clone git@github.com:123jixinyu/monitor.git
+`
+>
+2. 安装laravel依赖
+>
+`
+composer install
+`
+>
+3. 拷贝 .env.example到.env,并修改.env配置，建立相应数据库
+>
+4. 运行artisan命令初始化表以及生成应用key
+>
+`
+php artisan migrate
+php artisan key:generate
+`
+>
+5. 初始化基本数据
+>
+`
+composer dump-autoload
+php artisan db:seed
+`
+>
+6. 配置nginx映射到public 目录下，并且设置storage以及bootstrap目录权限。在public 目录下创建名为uploads的文件夹并赋予写入权限
+>
+7. 将/usr/bin/php /home/wwwroot/monitor/artisan schedule:run 加到crontab中去,其中/home/wwwroot/monitor是你的项目目录。
+>
+`* * * * * /usr/bin/php /home/wwwroot/monitor/artisan schedule:run`
 
-## Official Documentation
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
 
-## Contributing
+## 反馈与建议
+- QQ群: 630418030
+- 邮箱：<848280118@qq.com>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+---------
+感谢阅读这份帮助文档，欢迎加入群，大家可以一起交流沟通
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-### License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)

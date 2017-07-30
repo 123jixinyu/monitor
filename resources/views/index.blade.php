@@ -27,7 +27,7 @@
                         <span class="label label-primary pull-right"><i class="fa fa-html5"></i></span>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        <p>所有的文件已经打包好，只需要简单配置即可运行</p>
+                        <p>所有的文件已经打包好，只需要简单配置即可运行(暂不提供)</p>
                         <a href="#" class="btn btn-primary"><i class="fa fa-download"></i> Download</a>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
