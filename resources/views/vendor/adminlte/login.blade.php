@@ -80,6 +80,9 @@
                                    class="text-center"
                                 >{{ trans('adminlte::adminlte.register_a_new_membership') }}</a>
                             @endif
+                                <div class="pull-right">
+                                    <a href="https://github.com/123jixinyu/monitor">开源>>></a>
+                                </div>
                         </div>
                     </div>
                 </div>

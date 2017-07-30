@@ -14,6 +14,7 @@
         .btn, .btn-info.disabled {
             background:#6C67B9;
             border: 1px solid #2cabe3;
+            color:white;
         }
         .btn:hover{
             background:#605CA8;
