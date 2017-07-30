@@ -68,7 +68,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <button type="submit"
-                                        class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light">{{ trans('adminlte::adminlte.sign_in') }}</button>
+                                        class="btn btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light">{{ trans('adminlte::adminlte.sign_in') }}</button>
                             </div>
                         </div>
                     </form>
