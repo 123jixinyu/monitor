@@ -23,6 +23,9 @@ composer install
 >
 `
 php artisan migrate
+`
+<br/>
+`
 php artisan key:generate
 `
 >
@@ -30,6 +33,9 @@ php artisan key:generate
 >
 `
 composer dump-autoload
+`
+<br/>
+`
 php artisan db:seed
 `
 >
