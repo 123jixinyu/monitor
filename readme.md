@@ -45,8 +45,8 @@ php artisan db:seed
 >
 `* * * * * /usr/bin/php /home/wwwroot/monitor/artisan schedule:run`
 >
-8.默认登录账户为admin@admin.com 密码123456
-
+8. 默认登录账户为admin@admin.com 密码123456
+>
 
 ## 反馈与建议
 - QQ群: 630418030
