@@ -44,6 +44,7 @@ php artisan db:seed
 7. 将/usr/bin/php /home/wwwroot/monitor/artisan schedule:run 加到crontab中去,其中/home/wwwroot/monitor是你的项目目录。
 >
 `* * * * * /usr/bin/php /home/wwwroot/monitor/artisan schedule:run`
+>
 8.默认登录账户为admin@admin.com 密码123456
 
 
