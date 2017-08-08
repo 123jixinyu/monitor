@@ -1,5 +1,5 @@
 # 91 Monitor
-示例站点:www.91monitor.com
+示例站点:www.91monitor.com (不安装的情况下，无法使用管理员账号登录，只能注册后使用)
 
 **91 monitor**是一款专门为监控服务器状态的PHP开源系统。
 特点概述：支持监听各种服务器端口，以及web站点 , 并且支持终端控制
@@ -45,7 +45,7 @@ php artisan db:seed
 >
 `* * * * * /usr/bin/php /home/wwwroot/monitor/artisan schedule:run`
 >
-8. 默认登录账户为admin@admin.com 密码123456
+8. 安装后默认登录账户为admin@admin.com 密码123456（不安装情况下无法使用该账号）
 >
 
 ## 反馈与建议
