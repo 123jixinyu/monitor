@@ -122,7 +122,7 @@ class SendController extends Controller
             'id' => 'exists:sender_peoples,id',
             'name' => 'required|between:1,5',
             'type' => 'required|in:1,2,3',
-            'phone' => 'required',
+//            'phone' => 'required',
             'email' => 'required|email',
             'remark' => 'between:1,50',
         ]);
@@ -143,7 +143,7 @@ class SendController extends Controller
         $senderPeople->group_id = array_get($params, 'group_id');
         $senderPeople->name = array_get($params, 'name');
         $senderPeople->type = array_get($params, 'type');
-        $senderPeople->phone = array_get($params, 'phone');
+//        $senderPeople->phone = array_get($params, 'phone');
         $senderPeople->email = array_get($params, 'email');
         $senderPeople->remark = array_get($params, 'remark');
         $senderPeople->save();

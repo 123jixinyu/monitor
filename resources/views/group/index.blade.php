@@ -51,7 +51,7 @@
                                         <tr>
                                             <th>姓名</th>
                                             <th>通知类型</th>
-                                            <th>手机号码</th>
+                                            {{--<th>手机号码</th>--}}
                                             <th>邮箱</th>
                                             <th>备注/说明</th>
                                             <th>添加时间</th>
@@ -62,7 +62,7 @@
                                                 <tr>
                                                     <td>{{$people->name}}</td>
                                                     <td>{{$people->getType()}}</td>
-                                                    <td>{{$people->phone}}</td>
+                                                    {{--<td>{{$people->phone}}</td>--}}
                                                     <td>{{$people->email}}</td>
                                                     <td>{{$people->remark}}</td>
                                                     <td>{{$people->created_at}}</td>
@@ -151,15 +151,15 @@
                                         <label class="required">通知类型</label>
                                         <select class="form-control" v-model="member_type">
                                             <option value="1">邮箱</option>
-                                            <option value="2">手机</option>
-                                            <option value="3">邮箱+手机</option>
+                                            {{--<option value="2">手机</option>--}}
+                                            {{--<option value="3">邮箱+手机</option>--}}
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="required">手机号</label>
-                                        <input type="text" class="form-control" placeholder="请输入手机号"
-                                               v-model="member_phone">
-                                    </div>
+                                    {{--<div class="form-group">--}}
+                                        {{--<label class="required">手机号</label>--}}
+                                        {{--<input type="text" class="form-control" placeholder="请输入手机号"--}}
+                                               {{--v-model="member_phone">--}}
+                                    {{--</div>--}}
                                     <div class="form-group">
                                         <label class="required">邮箱</label>
                                         <input type="text" class="form-control" placeholder="请输入邮箱"
@@ -257,7 +257,7 @@
                         group_id: _this.group_id,
                         name: _this.member_name,
                         type: _this.member_type,
-                        phone: _this.member_phone,
+//                        phone: _this.member_phone,
                         email: _this.member_email,
                         remark: _this.member_remark
                     };
@@ -281,7 +281,7 @@
                             obj = res.data.data;
                             _this.member_name = obj.name;
                             _this.member_type = obj.type;
-                            _this.member_phone = obj.phone;
+//                            _this.member_phone = obj.phone;
                             _this.member_email = obj.email;
                             _this.member_remark = obj.remark;
                             $('#monitor-user-edit').modal();
