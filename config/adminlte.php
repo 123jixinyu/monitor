@@ -188,6 +188,7 @@ return [
         'datatables' => true,
     ],
     'admin_route'=>[
-        'system_index','terminal_index','member_index'
+//        'system_index','terminal_index','member_index',
+        'member_index'
     ]
 ];
