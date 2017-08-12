@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('save_pwd','UserController@savePwd')->name('save_pwd');
     Route::post('set_login','UserController@setLoginStatus')->name('set_login');
     Route::post('del_user','UserController@delMember')->name('del_user');
+    Route::get('get_member_monitor','UserController@getMemberMonitor')->name('get_member_monitor');
 
     //报表相关路由
 

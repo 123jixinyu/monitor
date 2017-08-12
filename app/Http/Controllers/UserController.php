@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Status;
+use App\Entities\UserMonitor;
 use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Collection;
 use Validator;
 use Auth;
 use Hash;
@@ -177,5 +179,36 @@ class UserController extends Controller
         $id = array_get($params, 'id');
         $member = User::destroy($id);
         return api_response('200', 'success');
+    }
+
+    /**
+     * 获取用户监控列表
+     * @param Request $request
+     * @return string
+     */
+    public function getMemberMonitor(Request $request)
+    {
+        $params = $request->all();
+        $validator = Validator::make($params, [
+            'id' => 'required|exists:users,id'
+        ], [
+            'id.required' => '非法的请求',
+            'id.exists' => '该用户不存在或已被删除'
+        ]);
+        if ($validator->fails()) {
+            return api_response('400', $validator->errors()->first());
+        }
+        $userId = array_get($params, 'id');
+        $userMonitors = UserMonitor::where('user_id', $userId)->get();
+        if ($userMonitors && $userMonitors instanceof Collection && !$userMonitors->isEmpty()) {
+            $userMonitors->transform(function ($item) {
+                $item->type_name = $item->monitorType->name;
+                $item->group_name = $item->sendGroup->name;
+                $item->status = $item->getStatus();
+                $item->is_open = $item->getOpen();
+                return $item;
+            });
+        }
+        return api_response('200', 'success', $userMonitors);
     }
 }
