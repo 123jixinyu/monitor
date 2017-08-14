@@ -108,7 +108,7 @@ class MonitorRepository
                 $log = MonitorLog::where('user_monitor_id', $this->monitor->id)
                     ->where('status', UserMonitor::STATUS_EXCEPTION)
                     ->where('is_send', MonitorLog::IS_SEND_YES)
-                    ->where('created_at', '>', date('Y-m-d H:i:s', strtotime('-1 hours')))->first();
+                    ->where('created_at', '>', date('Y-m-d H:i:s', strtotime('-10 minute')))->first();
                 if (!$log) {
                     $this->send(config('monitor.error_subject'), $this->getErrorEmailInfo());
                 }
