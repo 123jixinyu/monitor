@@ -23,6 +23,8 @@ class MonitorRepository
 
     public $sender;
 
+    const EMAIL_VALIDATOR_KEY='email_code_key';//邮箱验证码缓存key
+
     public function __construct(SenderRepository $sender)
     {
         $this->sender = $sender;

@@ -29,6 +29,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('get_user_monitor_detail', 'MonitorController@detail')->name('get_user_monitor_detail');
     Route::post('del_user_monitor', 'MonitorController@delete')->name('del_user_monitor');
     Route::post('open_handle', 'MonitorController@openHandle')->name('open_handle');
+    Route::post('send_email_code','MonitorController@sendEmailCode')->name('send_email_code');
+
 
     //通知组相关路由
     Route::get('get_groups', 'SendController@getGroup')->name('get_groups');

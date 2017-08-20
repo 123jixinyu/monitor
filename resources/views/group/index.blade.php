@@ -166,6 +166,11 @@
                                                v-model="member_email">
                                     </div>
                                     <div class="form-group">
+                                        <label class="">邮箱验证码</label><a href="javascript:void(0)" class="pull-right send-code-btn" v-on:click="send_email_code">发送验证码</a>
+                                        <input type="text" class="form-control" placeholder="请输入邮箱验证码"
+                                               v-model="member_email_code">
+                                    </div>
+                                    <div class="form-group">
                                         <label>备注/说明</label>
                                         <input type="text" class="form-control" placeholder="请输入备注"
                                                v-model="member_remark">
@@ -200,7 +205,8 @@
                 member_type: 1,
                 member_phone: '',
                 member_email: '',
-                member_remark: ''
+                member_remark: '',
+                member_email_code:''
             },
             methods: {
                 save: function () {
@@ -247,7 +253,6 @@
                     if (g_id) {
                         _this.group_id = g_id;
                         _this.group_name=g_name;
-                        console.log(g_name);
                     }
                 },
                 save_mem: function () {
@@ -259,7 +264,8 @@
                         type: _this.member_type,
 //                        phone: _this.member_phone,
                         email: _this.member_email,
-                        remark: _this.member_remark
+                        remark: _this.member_remark,
+                        member_email_code:_this.member_email_code
                     };
                     if (_this.member_id) {
                         form_data.id = _this.member_id;
@@ -307,6 +313,16 @@
                             }
                         });
                     }
+                },
+                send_email_code:function(){
+                    _this=this;
+                    _this.$http.post('{{route("send_email_code")}}',{email:_this.member_email,_token:_this.token}).then(function(res){
+                        if(res.data.code=='200'){
+                            $('.send-code-btn').html('已发送');
+                        }else{
+                            dialog.show(res.data.msg);
+                        }
+                    });
                 }
             }
         });

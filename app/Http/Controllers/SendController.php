@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 use App\Entities\SenderGroups;
 use App\Entities\SenderPeople;
 use App\Entities\UserMonitor;
+use App\Repository\MonitorRepository;
 use Illuminate\Http\Request;
 use Auth;
 use Validator;
-
+use Cache;
 class SendController extends Controller
 {
     public function index()
@@ -125,11 +126,16 @@ class SendController extends Controller
 //            'phone' => 'required',
             'email' => 'required|email',
             'remark' => 'between:1,50',
+            'member_email_code'=>'required'
         ]);
         if ($validator->fails()) {
             return api_response('400', $validator->errors()->first());
         }
         //TODO 验证手机号
+
+        if(array_get($params,'member_email_code')!=Cache::get(Auth::user()->id.'_'.array_get($params,'email').'_'.MonitorRepository::EMAIL_VALIDATOR_KEY)){
+            return api_response('400','验证码错误');
+        }
 
         //检查是否是该用户的请求
         $senderGroups = SenderGroups::where('user_id', Auth::user()->id)->where('id', array_get($params, 'group_id'))->first();

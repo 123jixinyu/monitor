@@ -111,7 +111,8 @@ return [
         'type'=>'类型',
         'id'=>'编号',
         'group_id'=>'通知组',
-        'freq'=>'监控频率'
+        'freq'=>'监控频率',
+        'member_email_code'=>'邮箱验证码'
     ],
 
 ];

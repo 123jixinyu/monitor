@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Mail\Message;
 use Validator;
 use Auth;
 use App;
+use Mail;
+use Cache;
 
 class MonitorController extends Controller
 {
@@ -53,7 +56,6 @@ class MonitorController extends Controller
         if (!in_array(array_get($params, 'freq'), config('monitor.freq'))) {
             return api_response('400', '参数错误');
         }
-
         $attributes = $request->all();
         $attributes['user_id'] = Auth::user()->id;
         if (isset($attributes['id'])) {
@@ -130,6 +132,32 @@ class MonitorController extends Controller
         }
         $userMonitor->is_open = $userMonitor->is_open ? 0 : 1;
         $userMonitor->save();
+        return api_response('200', 'success');
+    }
+
+    /**
+     * 发送验证码操作
+     * @param Request $request
+     * @return string
+     */
+    public function sendEmailCode(Request $request)
+    {
+        $params = $request->all();
+        $validator = Validator::make($params, [
+            'email' => 'required|email'
+        ], [
+            'email.required' => '邮箱不能为空',
+            'email.email' => '邮箱格式不正确'
+        ]);
+        if ($validator->fails()) {
+            return api_response('400', $validator->errors()->first());
+        }
+        $email=array_get($params,'email');
+        $code = rand(100000, 999999);
+        Cache::put(Auth::user()->id.'_'.$email.'_'.App\Repository\MonitorRepository::EMAIL_VALIDATOR_KEY, $code, 1);
+        Mail::send('emails.code', ['code'=>$code], function (Message $message)use($email) {
+            $message->to($email)->subject('邮箱验证');
+        });
         return api_response('200', 'success');
     }
 }
