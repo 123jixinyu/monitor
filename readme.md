@@ -89,15 +89,13 @@ php artisan db:seed
 - 配置nginx映射到public 目录下，并且设置storage以及bootstrap目录读写权限。在public 目录下创建名为uploads的文件夹并赋予写入权限
 
 >	 
-server
-    {
-        listen 80;
-        server_name www.91monitor.com;
-        index index.html index.htm index.php;
-        root  /home/wwwroot/monitor/public;
-	.....
-`
-
+		server
+   		 {
+        	listen 80;
+        	server_name www.91monitor.com;
+        	index index.html index.htm index.php;
+        	root  /home/wwwroot/monitor/public;
+			.....
 
 - 将/usr/bin/php /home/wwwroot/monitor/artisan schedule:run 加到crontab中去,其中/home/wwwroot/monitor是你的项目目录。（/usr/bin/php是我的服务器php可执行文件路径，这里你们写自己的路径）
 
