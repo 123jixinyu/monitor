@@ -54,7 +54,9 @@ cp .env.example .env
 	MAIL_PASSWORD=123456
 	MAIL_ENCRYPTION=ssl
 
-
+>调试模式,true为开启，false为关闭
+>   
+	APP_DEBUG=true
 
 
 
