@@ -3,11 +3,12 @@
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet"/>
     <style>
         .box-header {
-            background-color: #7674A7;
+            background-color : #7674A7;
         }
     </style>
 @endsection
 @section('content')
+    <div id="real-time-info">
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
@@ -53,7 +54,7 @@
             <!-- /.box -->
         </div>
     </div>
-    <div class="row" id="real-time-info">
+    <div class="row ">
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
@@ -114,6 +115,28 @@
             <!-- /.box -->
         </div>
     </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">网络使用情况</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover table-bordered">
+                        <tr v-for="item in net">
+                            <td>@{{item.net}}</td>
+                            <td>入网:<span>@{{item.input}}</span>G</td>
+                            <td>出网:<span>@{{item.out}}</span>G</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+    </div>
 @endsection
 @section('js')
     <script src="{{asset('assets/js/jquery.knob.js')}}"></script>
@@ -123,7 +146,10 @@
             data: {
                 sysInfo: {},
                 num: 0,
-                model: ''
+                model: '',
+                net: [
+                    {net:"xxx",input:"212",output:'55'}
+                ]
             },
             mounted: function () {
                 _this = this;
@@ -134,27 +160,32 @@
                     }, 3000);
                 }
             },
-            methods:{
-              getInfo:function(){
-                  _this=this;
-                  _this.$http.get('{{route("get_real_time_info")}}').then(function (res) {
-                      if (res.data.code == '200') {
-
-                          _this.sysInfo = res.data.data.sysInfo;
-                          _this.num = _this.sysInfo.cpu.num;
-                          _this.model = _this.sysInfo.cpu.model;
-                          $(".knob").knob({
-                              readOnly: true
-                          });
-                          $(".knob").eq(0).val(_this.free_space_percent);
-                          $(".knob").eq(1).val(_this.sysInfo.memPercent);
-                          $(".knob").eq(2).val(_this.sysInfo.memCachedPercent.toFixed(2));
-                          $(".knob").eq(3).val(_this.sysInfo.memRealPercent);
-                          $(".knob").trigger('change');
-
-                      }
-                  });
-              }
+            methods: {
+                getInfo: function () {
+                    _this = this;
+                    _this.$http.get('{{route("get_real_time_info")}}').then(function (res) {
+                        if (res.data.code == '200') {
+                            _this.net=[];
+                            _this.sysInfo = res.data.data.sysInfo;
+                            _this.num = _this.sysInfo.cpu.num;
+                            _this.model = _this.sysInfo.cpu.model;
+                            $(".knob").knob({
+                                readOnly: true
+                            });
+                            $(".knob").eq(0).val(_this.free_space_percent);
+                            $(".knob").eq(1).val(_this.sysInfo.memPercent);
+                            $(".knob").eq(2).val(_this.sysInfo.memCachedPercent.toFixed(2));
+                            $(".knob").eq(3).val(_this.sysInfo.memRealPercent);
+                            $(".knob").trigger('change');
+                            var list=res.data.data.net;
+                            if (list.length > 0) {
+                                list.forEach(function(item){
+                                    _this.net.push(item);
+                                });
+                            }
+                        }
+                    });
+                }
             },
             computed: {
                 free_space_percent: function () {

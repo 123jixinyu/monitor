@@ -10,6 +10,29 @@ class SystemRepository
         @header("content-Type: text/html; charset=utf-8"); //语言强制
     }
 
+
+    /**
+     * 获取网络流量
+     * @return array
+     */
+    public function getNetworkFlow()
+    {
+        $data = [];
+        $strs = @file("/proc/net/dev");
+        for ($i = 2; $i < count($strs); $i++) {
+            preg_match_all("/([^\s]+):[\s]{0,}(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)/", $strs[$i], $info);
+            $netName = $info[1][0];
+            $netInput = round(round($info[2][0] / 1024 / 1024, 5) / 1024, 5);
+            $netOut = round(round($info[10][0] / 1024 / 1024, 5) / 1024, 5);
+            $data[] = [
+                'net' => $netName,
+                'input' => $netInput,
+                'out' => $netOut,
+            ];
+        }
+        return $data;
+    }
+
     /**
      * 获取内存使用状况
      * @return string
@@ -99,8 +122,8 @@ class SystemRepository
     public function getSystemInfo()
     {
         // 根据不同系统取得CPU相关信息
-        $sysReShow='';
-        $sysInfo='';
+        $sysReShow = '';
+        $sysInfo = '';
         switch (PHP_OS) {
             case "Linux":
                 $sysReShow = (false !== ($sysInfo = $this->sys_linux())) ? "show" : "none";
@@ -110,12 +133,12 @@ class SystemRepository
                 $sysReShow = (false !== ($sysInfo = $this->sys_freebsd())) ? "show" : "none";
                 break;
             case 'Windows':
-                $sysReShow=(false !== ($sysInfo = $this->sys_windows())) ? "show" : "none";
+                $sysReShow = (false !== ($sysInfo = $this->sys_windows())) ? "show" : "none";
                 break;
             default:
                 break;
         }
-        return $sysReShow=='none'?'':$sysInfo;
+        return $sysReShow == 'none' ? '' : $sysInfo;
     }
 
     /**

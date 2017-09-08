@@ -49,6 +49,6 @@ class SystemController extends Controller
         $sysInfo['memRealUsed'] = round($sysInfo['memRealUsed'] / 1024, 3);
         $sysInfo['memRealFree'] = round($sysInfo['memRealFree'] / 1024, 3);
         $sysInfo['now'] = date('Y-m-d H:i:s', time());
-        return api_response('200', 'success', ['sysInfo' => $sysInfo]);
+        return api_response('200', 'success', ['sysInfo' => $sysInfo, 'net' => $systemRepository->getNetworkFlow()]);
     }
 }
