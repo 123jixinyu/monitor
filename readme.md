@@ -107,7 +107,7 @@ php artisan db:seed
 
 
 ## 反馈与建议
-- 加我微信进群:wfcansj  （备注填写:91monitor）
+- 加QQ群:630418030  （备注填写:91monitor）
 - 邮箱：<848280118@qq.com>
 
 ---------
