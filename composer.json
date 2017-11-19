@@ -7,7 +7,6 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "aliyuncs/oss-sdk-php": "^2.0",
         "barryvdh/laravel-ide-helper": "^2.2",
         "guzzlehttp/guzzle": "^6.2",
         "predis/predis": "^1.1",
