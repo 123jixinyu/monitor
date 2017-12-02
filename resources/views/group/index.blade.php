@@ -318,7 +318,7 @@
                     _this=this;
                     _this.$http.post('{{route("send_email_code")}}',{email:_this.member_email,_token:_this.token}).then(function(res){
                         if(res.data.code=='200'){
-                            $('.send-code-btn').html('已发送');
+                            $('.send-code-btn').html('重新发送');
                         }else{
                             dialog.show(res.data.msg);
                         }
