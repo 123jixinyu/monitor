@@ -22,6 +22,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('terminal_index','TerminalController@index')->name('terminal_index');
     Route::get('password_index','UserController@passwordIndex')->name('password_index');
     Route::get('member_index','UserController@memberIndex')->name('member_index');
+    Route::get('tools_index','ToolController@index')->name('tools_index');
+    Route::get('tools/{type?}','ToolController@tool')->name('tools');
 
 
     //用户监控相关路由
@@ -53,10 +55,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('del_user','UserController@delMember')->name('del_user');
     Route::get('get_member_monitor','UserController@getMemberMonitor')->name('get_member_monitor');
 
-    //报表相关路由
-
     //系统信息相关路由
     Route::get('get_real_time_info', 'SystemController@getRealTimeInfo')->name('get_real_time_info');
+
+    //工具相关路由
+    Route::post('tool_ping', 'ToolController@ping')->name('tool_ping');
+    Route::post('tool_trace', 'ToolController@trace')->name('tool_trace');
+
 });
 
 // 认证路由...

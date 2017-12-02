@@ -150,6 +150,11 @@ return [
             'url' => 'password_index',
             'icon' => 'lock',
         ],
+        [
+            'text' => '工具集合',
+            'url' => 'tools_index',
+            'icon' => 'inbox',
+        ],
     ],
 
     /*
