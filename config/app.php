@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'zh-CN',
 
     /*
     |--------------------------------------------------------------------------
@@ -147,6 +147,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Karlmonson\Ping\PingServiceProvider::class,
         JeroenNoten\LaravelAdminLte\ServiceProvider::class,
+        \RachidLaasri\LaravelInstaller\Providers\LaravelInstallerServiceProvider::class
     ],
 
     /*

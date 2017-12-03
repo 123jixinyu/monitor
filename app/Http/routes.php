@@ -11,7 +11,7 @@
 */
 
 Route::group(['middleware' => ['auth']], function () {
-    App::setLocale('zh');
+//    App::setLocale('zh');
 
 //    Route::get('/', 'IndexController@index')->name('index');
     Route::get('/', 'SystemController@index')->name('index');
