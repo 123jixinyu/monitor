@@ -7,6 +7,22 @@
     <div class="row">
         <div class="col-lg-3 col-xs-6">
             <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>Http</h3>
+
+                    <p>利用"Guzzle插件"检查http响应码。</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-life-buoy"></i>
+                </div>
+                <a href="{{route('tools',['type'=>'http'])}}" class="small-box-footer">
+                    去使用 <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
             <div class="small-box bg-aqua">
                 <div class="inner">
                     <h3>ping</h3>

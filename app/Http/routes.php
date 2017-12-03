@@ -61,6 +61,7 @@ Route::group(['middleware' => ['auth']], function () {
     //工具相关路由
     Route::post('tool_ping', 'ToolController@ping')->name('tool_ping');
     Route::post('tool_trace', 'ToolController@trace')->name('tool_trace');
+    Route::post('tool_http', 'ToolController@http')->name('tool_http');
 
 });
 
