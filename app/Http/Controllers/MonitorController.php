@@ -43,7 +43,7 @@ class MonitorController extends Controller
             'monitor_id' => 'required|exists:monitor_types,id',
             'group_id' => 'required|exists:sender_groups,id',
             'host' => 'required|ip',
-            'port' => 'required|integer|between:1,65535',
+            'port' => 'required|integer|between:-1,65535',
             'timeout' => 'required|integer|between:1,5',
             'times' => 'required|integer|between:1,5',
             'is_open' => 'required|in:0,1',

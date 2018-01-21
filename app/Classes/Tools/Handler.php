@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Classes\Tools;
 
 use App\Entities\UserMonitor;
@@ -14,7 +15,7 @@ class Handler
     public function server(UserMonitor $userMonitor)
     {
         $type = $userMonitor->monitorType->name;
-        if ($type && ($func = lcfirst($type))) {
+        if ($type && ($func = strtolower($type))) {
             if (method_exists($this, $func)) {
                 return call_user_func_array([$this, $func], [$userMonitor]);
             }
@@ -25,13 +26,16 @@ class Handler
 
     public function http(UserMonitor $userMonitor)
     {
-        $code = ping_get_response_code($userMonitor->host, $userMonitor->timeout, false);
-        return $code;
+        return ping_get_response_code($userMonitor->host, $userMonitor->timeout, false);
     }
 
-    public function mySQL(UserMonitor $userMonitor)
+    public function mysql(UserMonitor $userMonitor)
     {
-        $status = check_port($userMonitor->host, $userMonitor->port, $userMonitor->timeout);
-        return $status;
+        return check_port($userMonitor->host, $userMonitor->port, $userMonitor->timeout);
+    }
+
+    public function ping(UserMonitor $userMonitor)
+    {
+        return ping_address($userMonitor->host);
     }
 }

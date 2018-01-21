@@ -157,4 +157,25 @@ if (!function_exists('get_confirm_times')) {
     }
 }
 
-
+if (!function_exists('ping_address')) {
+    /**
+     * ping指定ip地址
+     * @param $ip
+     * @return bool
+     */
+    function ping_address($ip)
+    {
+        $status = -1;
+        if (strcasecmp(PHP_OS, 'WINNT') === 0) {
+            // Windows 服务器下
+            $pingresult = exec("ping -n 1 {$ip}", $outcome, $status);
+        } elseif (strcasecmp(PHP_OS, 'Linux') === 0) {
+            // Linux 服务器下
+            $pingresult = exec("ping -c 1 {$ip}", $outcome, $status);
+        }
+        if (0 == $status) {
+            return true;
+        }
+        return false;
+    }
+}

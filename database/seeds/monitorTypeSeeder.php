@@ -17,6 +17,7 @@ class MonitorTypeSeeder extends Seeder
             ['name' => 'Http', 'default_host' => '127.0.0.1', 'default_port' => '80','default_timeout'=>'2','default_times'=>'3'],
             ['name' => 'Redis', 'default_host' => '127.0.0.1', 'default_port' => '6379','default_timeout'=>'2','default_times'=>'3'],
             ['name' => 'SSH', 'default_host' => '127.0.0.1', 'default_port' => '22','default_timeout'=>'2','default_times'=>'3'],
+            ['name' => 'PING', 'default_host' => '127.0.0.1', 'default_port' => '-1','default_timeout'=>'2','default_times'=>'3'],
             ['name' => 'Custom', 'default_host' => '127.0.0.1', 'default_port' => '0','default_timeout'=>'2','default_times'=>'3'],
         ]);
     }
