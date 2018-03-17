@@ -200,6 +200,15 @@
     <script src="{{ asset('vendor/adminlte/dist/js/app.min.js') }}"></script>
     <script src="{{asset('assets/js/vue/vue.js')}}"></script>
     <script src="{{asset('assets/js/vue/vue-resource.min.js')}}"></script>
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?877d0bfd775a7acf49933082b085a9f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
     {{--@stack('js')--}}
     <script>
         var dialog = new Vue({
