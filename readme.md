@@ -9,13 +9,16 @@
 - Composer 工具
 - MySQL 5.6以上
 
-### 安装
+### 第一步克隆
 - 克隆项目(确保有github账号，并且本地公钥已经在github账户，否则无法克隆，你也可以选择https方式的下载)
 
 `
 git clone git@github.com:123jixinyu/monitor.git
 `
+### 第二步安装
 
+注意：第二步过程可使用脚本安装,项目根目录执行:
+`sudo sh 91monitor_install.sh`,也可按照下面的方法一步步安装（建议）
 - 安装laravel依赖
 进入项目根目录，例如我的项目目录为/home/wwwroot/monitor
 
@@ -87,7 +90,7 @@ composer dump-autoload
 `
 php artisan db:seed
 `
-
+### 第三步 配置nginx(示例配置，可跳过)
 - 配置nginx映射到public 目录下，并且设置storage以及bootstrap目录读写权限。在public 目录下创建名为uploads的文件夹并赋予写入权限
 
 >	 
@@ -144,7 +147,7 @@ php artisan db:seed
         access_log  /home/wwwlogs/access.log;
     }
    
-
+### 第四步
 - 将/usr/bin/php /home/wwwroot/monitor/artisan schedule:run 加到crontab中去,其中/home/wwwroot/monitor是你的项目目录。（/usr/bin/php是我的服务器php可执行文件路径，这里你们写自己的路径）
 
 `* * * * * /usr/bin/php /home/wwwroot/monitor/artisan schedule:run`
