@@ -63,6 +63,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('tool_trace', 'ToolController@trace')->name('tool_trace');
     Route::post('tool_http', 'ToolController@http')->name('tool_http');
 
+    //服务器监控相关路由
+    Route::get('server_index','ServerController@index')->name('server_index');
+    Route::post('server_save','ServerController@save')->name('server_save');
+    Route::post('server_delete','ServerController@delete')->name('server_delete');
+    Route::get('server_detail','ServerController@detail')->name('server_detail');
+    Route::post('server_generate','ServerController@generateKey')->name('server_generate');
+    Route::post('get_all_info','ServerController@getAllSysInfo')->name('server_get_all_info');
+
 });
 
 // 认证路由...

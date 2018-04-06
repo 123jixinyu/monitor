@@ -116,6 +116,11 @@ return [
             'icon' => 'desktop',
         ],
         [
+            'text' => '服务器管理',
+            'url' => 'server_index',
+            'icon' => 'window-restore',
+        ],
+        [
             'text' => '通知组管理',
             'url' => 'group_index',
             'icon' => 'group',

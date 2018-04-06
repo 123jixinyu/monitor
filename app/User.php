@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Entities\Server;
 use App\Entities\UserMonitor;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -59,5 +60,10 @@ class User extends Model implements AuthenticatableContract,
     {
         return array_get(['禁止登录', '取消登录禁止'],
             $this->login_status);
+    }
+
+    public function servers() {
+
+        return $this->hasMany(Server::class, 'user_id', 'id');
     }
 }
