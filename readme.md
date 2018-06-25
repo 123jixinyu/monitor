@@ -11,3 +11,5 @@
 
 ### 安装教程
 http://doc.91monitor.com/
+
+我们也提供非开源版：http://business.91monitor.com
