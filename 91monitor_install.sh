@@ -25,7 +25,7 @@ else
     exit;
 fi
 
-phpversion=`php -r "echo (phpversion() -'5.5.9')>0;"`
+phpversion=`php -r "echo strnatcmp(phpversion(),'5.5.9') >= 0;"`
 if [ $phpversion > 0 ]; then
     echo 'OK........php版本大于5.5.9';
 else
