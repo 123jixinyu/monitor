@@ -1,5 +1,3 @@
-# 91 Monitor
-示例站点:http://demo.91monitor.com (不安装的情况下，无法使用管理员账号登录，只能注册后使用)
 
 **91 monitor**是一款专门为监控服务器状态的PHP开源系统。
 特点概述：支持监听各种服务器端口，以及web站点 , 并且支持终端控制
@@ -10,6 +8,4 @@
 - MySQL 5.6以上
 
 ### 安装教程
-http://doc.91monitor.com/
-
-我们也提供非开源版：http://www.91monitor.com
+https://www.oschina.net/p/91monitor
