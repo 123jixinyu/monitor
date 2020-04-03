@@ -9,3 +9,7 @@
 
 ### 安装教程
 https://www.oschina.net/p/91monitor
+
+
+### 公有云（非开源、支持私有化部署）
+http://www.51yunjiankong.com/
